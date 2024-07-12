@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import { Link } from "react-router-dom";
+import PerformaInvoiceKESLayout from "./PerformaInvoiceKESLayout";
 
 function PerformaInvoiceKES() {
   const getTodayDate = () => {
@@ -23,32 +25,36 @@ function PerformaInvoiceKES() {
     setSelectedTax(event.target.value);
   };
 
+  const [formData, setFormData] = useState(null);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     let shippedToCompany = "";
     let shippedToGSTIN = "";
+      let shippedToPAN = "";
     let shippedToAddress = "";
     let shippedToPhoneNumber = "";
 
     if (event.target.elements.shippedToDefault.checked) {
       shippedToCompany = "Koios Engineering Solutions PVT Ltd";
       shippedToGSTIN = "22AAAAA1234A1Z7";
+      shippedToPAN = "QHYUN1234T";
       shippedToAddress =
         "No. 57/D, Balaji Layout, Vajarahalli, Near 100ft road, off Knakapura main road Thalaghattapura,Bangalore South, Bangalore - 560109.";
       shippedToPhoneNumber = "+911234567890";
     }
 
-      let SGST = "";
-      let CGST = "";
-      let IGST = "";
+    let SGST = "";
+    let CGST = "";
+    let IGST = "";
 
-      if (selectedTax === "SGSTandCGST") {
-        SGST = event.target.elements.SGST.value || "";
-        CGST = event.target.elements.CGST.value || "";
-      } else if (selectedTax === "IGST") {
-        IGST = event.target.elements.IGST.value || "";
-      }
+    if (selectedTax === "SGSTandCGST") {
+      SGST = event.target.elements.SGST.value || "";
+      CGST = event.target.elements.CGST.value || "";
+    } else if (selectedTax === "IGST") {
+      IGST = event.target.elements.IGST.value || "";
+    }
 
     let formData = {
       piNo: event.target.elements.piNo.value,
@@ -58,10 +64,12 @@ function PerformaInvoiceKES() {
       placeOfSupply: event.target.elements.placeOfSupply.value,
       billedToCompany: event.target.elements.billedToCompany.value,
       billedToGSTIN: event.target.elements.billedToGSTIN.value,
+      billedToPAN: event.target.elements.billedToPAN.value,
       billedToAddress: event.target.elements.billedToAddress.value,
       billedToPhoneNumber: billedPhoneNumberValue,
       shippedToCompany: event.target.elements.shippedToCompany.value,
       shippedToGSTIN: event.target.elements.shippedToGSTIN.value,
+      shippedToPAN: event.target.elements.shippedToPAN.value,
       shippedToAddress: event.target.elements.shippedToAddress.value,
       shippedToPhoneNumber: shippedPhoneNumberValue,
       shippedToDefault: event.target.elements.shippedToDefault.checked,
@@ -75,10 +83,11 @@ function PerformaInvoiceKES() {
     if (event.target.elements.shippedToDefault.checked) {
       formData.shippedToCompany = shippedToCompany;
       formData.shippedToGSTIN = shippedToGSTIN;
+       formData.shippedToPAN = shippedToPAN;
       formData.shippedToAddress = shippedToAddress;
       formData.shippedToPhoneNumber = shippedToPhoneNumber;
     }
-
+    setFormData(formData);
     console.log("Form Data:", formData);
   };
 
@@ -102,7 +111,14 @@ function PerformaInvoiceKES() {
   return (
     <div>
       <div className="heading">
-        <p>Purchase Order</p>
+        <div className="breadcrumb">
+          <Link to="/">Home</Link>
+          <span>{">"}</span>
+          <Link to="/PerformaInvoice ">Performa Invoice </Link>
+          <span>{">"}</span>
+          <p>Koios Engineering Service</p>
+        </div>
+        <p>Performa Invoice</p>
       </div>
       <form id="PurchaseKES" name="PurchaseKES" onSubmit={handleSubmit}>
         <div className="formContainer">
@@ -180,6 +196,15 @@ function PerformaInvoiceKES() {
                   placeholder="22AAAAA0000A1Z5"
                 />
               </div>
+              <div className="formInputDiv">
+                <label htmlFor="billedToPAN">PAN</label>
+                <input
+                  type="text"
+                  id="billedToPAN"
+                  name="billedToPAN"
+                  placeholder="ABCTY1234D"
+                />
+              </div>
             </div>
             <div className="formSubSection">
               <div className="formInputDiv">
@@ -223,6 +248,15 @@ function PerformaInvoiceKES() {
                   id="shippedToGSTIN"
                   name="shippedToGSTIN"
                   placeholder="22AAAAA0000A1Z5"
+                />
+              </div>
+              <div className="formInputDiv">
+                <label htmlFor="shippedToPAN">PAN</label>
+                <input
+                  type="text"
+                  id="shippedToPAN"
+                  name="shippedToPAN"
+                  placeholder="ABCTY1234D"
                 />
               </div>
             </div>
@@ -418,6 +452,7 @@ function PerformaInvoiceKES() {
           </div>
         </div>
       </form>
+      {formData && <PerformaInvoiceKESLayout data={formData} />}
     </div>
   );
 }

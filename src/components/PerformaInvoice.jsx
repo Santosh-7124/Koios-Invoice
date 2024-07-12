@@ -4,6 +4,13 @@ import { Link } from "react-router-dom";
 function PerformaInvoice() {
   return (
     <div className="Home">
+      <div className="heading" style={{paddingTop:"0px", paddingBottom:"36px"}}>
+        <div className="breadcrumb">
+          <Link to="/">Home</Link>
+          <span>{">"}</span>
+          <p>Performa Invoice </p>
+        </div>
+      </div>
       <div className="homeHeading">
         <span>Choose the Sender </span>
         <p>which Company?</p>
