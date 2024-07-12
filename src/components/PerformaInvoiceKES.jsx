@@ -78,6 +78,8 @@ function PerformaInvoiceKES() {
       SGST: SGST,
       CGST: CGST,
       IGST: IGST,
+      PaymentTermsandConditions:
+        event.target.elements.PaymentTermsandConditions.value,
     };
 
     if (event.target.elements.shippedToDefault.checked) {
@@ -125,8 +127,11 @@ function PerformaInvoiceKES() {
           <div className="formSection">
             <div className="formSubSection">
               <div className="formInputDiv">
-                <label htmlFor="piNo">PI No</label>
+                <label htmlFor="piNo">
+                  PI No<span>*</span>
+                </label>
                 <input
+                  required
                   type="text"
                   id="piNo"
                   name="piNo"
@@ -134,8 +139,11 @@ function PerformaInvoiceKES() {
                 />
               </div>
               <div className="formInputDiv">
-                <label htmlFor="piDate">PI Date</label>
+                <label htmlFor="piDate">
+                  PI Date<span>*</span>
+                </label>
                 <input
+                  required
                   type="date"
                   id="piDate"
                   name="piDate"
@@ -143,8 +151,11 @@ function PerformaInvoiceKES() {
                 />
               </div>
               <div className="formInputDiv">
-                <label htmlFor="leadTime">Lead Time</label>
+                <label htmlFor="leadTime">
+                  Lead Time<span>*</span>
+                </label>
                 <input
+                  required
                   type="text"
                   id="leadTime"
                   name="leadTime"
@@ -154,8 +165,11 @@ function PerformaInvoiceKES() {
             </div>
             <div className="formSubSection">
               <div className="formInputDiv">
-                <label htmlFor="referenceNumber">Reference Number</label>
+                <label htmlFor="referenceNumber">
+                  Reference Number<span>*</span>
+                </label>
                 <input
+                  required
                   type="text"
                   id="referenceNumber"
                   name="referenceNumber"
@@ -177,8 +191,11 @@ function PerformaInvoiceKES() {
             <div className="formSectionHeading">Billed To</div>
             <div className="formSubSection">
               <div className="formInputDiv">
-                <label htmlFor="billedToCompany">Company</label>
+                <label htmlFor="billedToCompany">
+                  Company<span>*</span>
+                </label>
                 <input
+                  required
                   type="text"
                   id="billedToCompany"
                   name="billedToCompany"
@@ -216,11 +233,14 @@ function PerformaInvoiceKES() {
                 />
               </div>
               <div className="formInputDiv">
-                <label htmlFor="billedToPhoneNumber">Phone Number</label>
+                <label htmlFor="billedToPhoneNumber">
+                  Phone Number<span>*</span>
+                </label>
                 <PhoneInput
                   placeholder="Enter phone number"
                   country="IN"
                   value={billedPhoneNumberValue}
+                  required
                   onChange={billedPhoneNumberSetValue}
                   id="billedToPhoneNumber"
                 />
@@ -296,8 +316,11 @@ function PerformaInvoiceKES() {
               <div className="formItems" key={index}>
                 <div className="formSubSection">
                   <div className="formInputDiv">
-                    <label htmlFor={`partName${index}`}>Part Name</label>
+                    <label htmlFor={`partName${index}`}>
+                      Part Name<span>*</span>
+                    </label>
                     <input
+                      required
                       type="text"
                       id={`partName${index}`}
                       name="partName"
@@ -356,8 +379,11 @@ function PerformaInvoiceKES() {
                 </div>
                 <div className="formSubSection">
                   <div className="formInputDiv">
-                    <label htmlFor={`HSNCode${index}`}>HSN Code</label>
+                    <label htmlFor={`HSNCode${index}`}>
+                      HSN Code<span>*</span>
+                    </label>
                     <input
+                      required
                       type="text"
                       id={`HSNCode${index}`}
                       name="HSNCode"
@@ -366,8 +392,11 @@ function PerformaInvoiceKES() {
                     />
                   </div>
                   <div className="formInputDiv">
-                    <label htmlFor={`Quantity${index}`}>Quantity</label>
+                    <label htmlFor={`Quantity${index}`}>
+                      Quantity<span>*</span>
+                    </label>
                     <input
+                      required
                       type="number"
                       id={`Quantity${index}`}
                       name="Quantity"
@@ -376,8 +405,11 @@ function PerformaInvoiceKES() {
                     />
                   </div>
                   <div className="formInputDiv">
-                    <label htmlFor={`Cost${index}`}>Cost</label>
+                    <label htmlFor={`Cost${index}`}>
+                      Cost<span>*</span>
+                    </label>
                     <input
+                      required
                       type="number"
                       id={`Cost${index}`}
                       name="Cost"
@@ -424,20 +456,23 @@ function PerformaInvoiceKES() {
             {selectedTax === "SGSTandCGST" && (
               <div className="formSubSection SGSTandCGST">
                 <div className="formInputDiv">
-                  <label htmlFor="SGST">SGST in %</label>
-                  <input type="number" id="SGST" name="SGST" defaultValue={9} />
+                  <label htmlFor="SGST">
+                    SGST in %<span>*</span>
+                  </label>
+                  <input required type="number" id="SGST" name="SGST" defaultValue={9} />
                 </div>
                 <div className="formInputDiv">
-                  <label htmlFor="CGST">CGST in %</label>
-                  <input type="number" id="CGST" name="CGST" defaultValue={9} />
+                  <label htmlFor="CGST">CGST in %<span>*</span></label>
+                  <input required type="number" id="CGST" name="CGST" defaultValue={9} />
                 </div>
               </div>
             )}
             {selectedTax === "IGST" && (
               <div className="formSubSection IGST">
                 <div className="formInputDiv">
-                  <label htmlFor="IGST">IGST in %</label>
+                  <label htmlFor="IGST">IGST in %<span>*</span></label>
                   <input
+                  required
                     type="number"
                     id="IGST"
                     name="IGST"
@@ -446,6 +481,20 @@ function PerformaInvoiceKES() {
                 </div>
               </div>
             )}
+          </div>
+          <div className="formSection">
+            <div className="formSubSection">
+              <div className="formInputDiv">
+                <label htmlFor="PaymentTermsandConditions">
+                  Payment Terms & Conditions<span>*</span>
+                </label>
+                <textarea
+                required
+                  id="PaymentTermsandConditions"
+                  name="PaymentTermsandConditions"
+                />
+              </div>
+            </div>
           </div>
           <div className="formButton">
             <button type="submit">Generate</button>

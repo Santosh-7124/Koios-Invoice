@@ -1,5 +1,6 @@
 import React from "react";
 import KESLogo from "../assets/KESLogo.png";
+import Signature from "../assets/Signature.png";
 import { toWords } from "number-to-words";
 
 const formatDate = (dateString) => {
@@ -277,6 +278,82 @@ const PerformaInvoiceKESLayout = ({ data }) => {
                   </div>
                 </>
               )}
+            </div>
+          </div>
+          <div className="performaEndDetails">
+            <div className="performaBankDetails">
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <sub>Koios Engineering Solutions PVT Ltd</sub>
+                <sub>ICICI Bank</sub>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                {" "}
+                <p
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  {"    "}
+                  <span style={{ width: "120px" }}>IFSC Code</span>:
+                </p>
+                <p
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  {"    "}
+                  <span style={{ width: "120px" }}>Account Number</span>:
+                </p>
+                <p
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  {"    "}
+                  <span style={{ width: "120px" }}>Branch</span>:
+                </p>
+                <p
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  {"    "}
+                  <span style={{ width: "120px" }}>Account Type</span>:
+                </p>
+              </div>
+            </div>
+            <div className="performaPaymentDetails">
+              <div className="performaPaymentDetailsLeft">
+                <div className="performaPaymentDetailsHeading">
+                  <sub>Terms & Conditions</sub>
+                  <span>Payment Terms</span>
+                </div>
+                <div className="performaPaymentDetailsText">
+                  {data.PaymentTermsandConditions}
+                </div>
+              </div>
+              <div className="performaPaymentDetailsRight">
+                <div className="performaSignature">
+                  <img src={Signature}></img>
+                </div>
+                <p>Authorised Signatory</p>
+              </div>
             </div>
           </div>
         </div>
