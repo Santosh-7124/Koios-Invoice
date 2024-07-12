@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Purchase() {
+function PerformaInvoice() {
   return (
     <div className="Home">
       <div className="homeHeading">
@@ -9,10 +9,10 @@ function Purchase() {
         <p>which Company?</p>
       </div>
       <div className="homeContainer">
-        <Link to="/purchase/KES" className="homeOption">
+        <Link to="/PerformaInvoice/KES" className="homeOption">
           <p>Koios Engineering Solutions</p>
         </Link>
-        <Link to="/purchase/TKS" className="homeOption">
+        <Link to="/PerformaInvoice/TKS" className="homeOption">
           <p>The Koios Studio</p>
         </Link>
       </div>
@@ -20,4 +20,4 @@ function Purchase() {
   );
 }
 
-export default Purchase;
+export default PerformaInvoice;

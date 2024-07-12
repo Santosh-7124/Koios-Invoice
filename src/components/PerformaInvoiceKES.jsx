@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
-function PurchaseKES() {
+function PerformaInvoiceKES() {
   const getTodayDate = () => {
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -422,4 +422,4 @@ function PurchaseKES() {
   );
 }
 
-export default PurchaseKES;
+export default PerformaInvoiceKES;

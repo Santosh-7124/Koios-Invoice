@@ -9,8 +9,8 @@ function Home() {
         <p>type of invoice? </p>
       </div>
       <div className="homeContainer">
-        <Link to="/purchase" className="homeOption">
-          <p>Purchase Invoice</p>
+        <Link to="/PerformaInvoice" className="homeOption">
+          <p>Performa Invoice</p>
         </Link>
         <Link to="/" className="homeOption">
           <p>Purchase Invoice</p>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function PurchaseTKS() {
+function PerformaInvoiceTKS() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function PurchaseTKS() {
   )
 }
 
-export default PurchaseTKS
+export default PerformaInvoiceTKS
