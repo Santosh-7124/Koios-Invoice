@@ -235,13 +235,13 @@ label {
   line-height: 24px;
 }
 
-label span{
-  color: #F00;
-font-family: Poppins;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 24px;
+label span {
+  color: #f00;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .formInputDiv input {
@@ -374,9 +374,18 @@ select {
 
 /* Layout */
 
+.containerBig {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .layout {
   display: flex;
- width: 100%;
+  min-width: 800px;
   padding: 20px 10px;
   flex-direction: column;
   align-items: flex-start;
@@ -799,9 +808,9 @@ select {
   line-height: 14px;
 }
 
-.performaPaymentDetailsRight{
-    width: 30%;
-    height: 100%;
+.performaPaymentDetailsRight {
+  width: 30%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -809,13 +818,13 @@ select {
   gap: 16px;
 }
 
-.performaSignature{
+.performaSignature {
   width: 100%;
   height: 60px;
 }
 
-.performaSignature img{
+.performaSignature img {
   width: 100%;
-    height: 60px;
+  height: 60px;
   object-fit: cover;
 }
