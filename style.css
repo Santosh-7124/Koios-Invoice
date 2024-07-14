@@ -226,7 +226,6 @@ form {
 }
 
 label {
-  width: 100%;
   color: var(--Default-Text-Primary, #111);
   font-family: Poppins;
   font-size: 16px;
@@ -340,7 +339,78 @@ label span {
   cursor: pointer;
 }
 
+.Services {
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.Details {
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  padding: 24px;
+  border-radius: 8px;
+    animation: fadeInFromLeft 0.5s ease;
+}
+
+.Complimentary{
+    display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  color: var(--Default-Text-Primary, #111);
+text-align: center;
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px;
+}
+
+.Complimentary p{
+  color: var(--Default-Text-Primary, #111);
+text-align: center;
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px;
+}
+
+
+.addDetails {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  color: var(--Default-Text-Primary, #111);
+  text-align: center;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  cursor: pointer;
+}
+
 .formDeleteItem {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 8px;
+  align-self: stretch;
+  color: var(--Default-Text-Primary, #111);
+  text-align: center;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.deleteDetails {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
@@ -385,7 +455,7 @@ select {
 
 .layout {
   display: flex;
-  min-width: 800px;
+  width: 800px;
   padding: 20px 10px;
   flex-direction: column;
   align-items: flex-start;

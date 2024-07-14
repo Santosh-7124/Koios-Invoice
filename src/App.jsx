@@ -4,6 +4,8 @@ import Home from "./components/Home";
 import PerformaInvoice from "./components/PerformaInvoice";
 import PerformaInvoiceKES from "./components/PerformaInvoiceKES";
 import PerformaInvoiceTKS from "./components/PerformaInvoiceTKS";
+import TaxInvoice from "./components/TaxInvoice";
+import TaxInvoiceKES from "./components/TaxInvoiceKES";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <Route path="PerformaInvoice" element={<PerformaInvoice />} />
           <Route path="PerformaInvoice/KES" element={<PerformaInvoiceKES />} />
           <Route path="PerformaInvoice/TKS" element={<PerformaInvoiceTKS />} />
+          <Route path="TaxInvoice" element={<TaxInvoice />} />
+          <Route path="TaxInvoice/KES" element={<TaxInvoiceKES />} />
           <Route path="*" element={<Home />} />
         </Route>
       </Routes>

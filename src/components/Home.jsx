@@ -12,8 +12,8 @@ function Home() {
         <Link to="/PerformaInvoice" className="homeOption">
           <p>Performa Invoice</p>
         </Link>
-        <Link to="/" className="homeOption">
-          <p>Purchase Invoice</p>
+        <Link to="/TaxInvoice" className="homeOption">
+          <p>Tax Invoice</p>
         </Link>
         <Link to="/" className="homeOption">
           <p>Purchase Invoice</p>
