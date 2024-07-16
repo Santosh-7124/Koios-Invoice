@@ -38,7 +38,10 @@ const PerformaInvoiceKESLayout = ({ data }) => {
   });
 
   return (
-    <div className="containerBig">
+    <div className="containerBig" id="containerBig">
+      <div className="formSection" style={{ alignItems: "center" }}>
+        <div className="formSectionHeading">Preview</div>
+      </div>
       <div className="layout" ref={targetRef}>
         <div className="performaHeading">
           <p className="performaHeadingText">Performa Invoice</p>
@@ -372,7 +375,9 @@ const PerformaInvoiceKESLayout = ({ data }) => {
           </div>
         </div>
       </div>
-      <button onClick={toPDF}>Download PDF</button>
+      <div className="formButton">
+        <button onClick={toPDF}>Download PDF</button>
+      </div>
     </div>
   );
 };
