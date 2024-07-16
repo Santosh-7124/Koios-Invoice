@@ -34,7 +34,7 @@ const PerformaInvoiceKESLayout = ({ data }) => {
   const { toPDF, targetRef } = usePDF({
     method: "save",
     filename: "usepdf-example.pdf",
-    page: { margin: Margin.NONE, resolution: Resolution.HIGH },
+    page: { margin: Margin.NONE, resolution: Resolution.HIGH, size: "A1" },
   });
 
   return (
