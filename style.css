@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 * {
   margin: 0;
@@ -498,7 +498,7 @@ select {
 
 .performaHeading {
   display: flex;
-  padding: 24px 0px 8px 0px;
+  padding: 24px;
   flex-direction: column;
   align-items: center;
   gap: 40px;
@@ -521,17 +521,18 @@ select {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 100px;
   align-self: stretch;
 }
 
 .performaHeadingLogo {
-  height: 120px;
-  width: 120px;
+  width: 145.638px;
+  height: 128px;
 }
 
 .performaHeadingLogo img {
   width: 100%;
+  object-fit: cover;
 }
 
 .performaHeadingInfo {
@@ -549,7 +550,6 @@ select {
   font-style: normal;
   font-weight: 700;
   line-height: 14px;
-  text-transform: uppercase;
 }
 
 .performaHeadingInfoSub {
@@ -559,8 +559,28 @@ select {
   gap: 8px;
 }
 
+.performaHeadingInfoSub .performaDetailsNumber p {
+  width: 274px;
+  justify-content: flex-start;
+  color: rgba(17, 17, 17, 0.8);
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+}
+
+.performaHeadingInfoSub .performaDetailsNumber p sub {
+  color: rgba(17, 17, 17, 0.6);
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+}
+
 .performaHeadingInfoSub p {
-  width: 360px;
+  width: 274px;
   color: rgba(17, 17, 17, 0.8);
   font-family: Inter;
   font-size: 11px;
@@ -595,8 +615,17 @@ select {
   background: #ececec;
 }
 
-.performaDetailsDateAndNumber p {
+.performaDetailsDateAndNumber .p {
   color: rgba(17, 17, 17, 0.7);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.performaDetailsDateAndNumber p {
+  color: rgba(17, 17, 17, 0.85);
   font-family: Inter;
   font-size: 12px;
   font-style: normal;
@@ -618,6 +647,29 @@ select {
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
+}
+
+.performaDetailsNumber p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.performaDetailsNumber p span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 8px;
+}
+
+.performaDetailsNumber p sub {
+  width: 80px;
+  color: rgba(17, 17, 17, 0.7);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
 }
 
 .performaDetailsContainer {
@@ -656,6 +708,41 @@ select {
   line-height: 14px;
 }
 
+.performaDetailsSetContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.performaDetailsSetContainer .set {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1 0 0;
+}
+
+.performaDetailsSetContainer .set p {
+  color: #111;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 14px;
+}
+
+.performaDetailsSetContainer .set span {
+  width: 274px;
+  color: rgba(17, 17, 17, 0.8);
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+}
+
 .performaDetailsSetCompany {
   color: #111;
   font-family: Inter;
@@ -679,7 +766,6 @@ select {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
   align-self: stretch;
 }
 
@@ -702,14 +788,19 @@ select {
   width: 10%;
 }
 .partName {
-  width: 25%;
+  width: 20%;
 }
 .HSNcode {
   width: 20%;
   text-align: center;
 }
+
+.detail {
+  width: 20%;
+  text-align: center;
+}
 .Quantity {
-  width: 15%;
+  width: 10%;
   text-align: center;
 }
 .UnitCost {
@@ -726,14 +817,13 @@ select {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
   align-self: stretch;
 }
 
 .performaTableSet {
   width: 100%;
   display: flex;
-  padding: 0px 8px 8px 24px;
+  padding: 24px 8px 8px 24px;
   align-items: flex-start;
   gap: 10px;
   align-self: stretch;
@@ -743,7 +833,24 @@ select {
   font-size: 11px;
   font-style: normal;
   font-weight: 500;
-  line-height: 14px; /* 127.273% */
+  line-height: 14px;
+}
+
+.performaTableSetDetails{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+}
+
+.performaTableSetDetailsSet{
+    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 4px;
 }
 
 .performaEnd {

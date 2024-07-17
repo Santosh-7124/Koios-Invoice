@@ -17,7 +17,7 @@ function TaxInvoiceKES() {
   const [items, setItems] = useState([
     {
       partName: "",
-      details: [{ detail: "", quantity: "", cost: "", complimentary: false }],
+      details: [{ detail: "", quantity: "0", cost: "0", complimentary: false }],
     },
   ]);
 
@@ -70,7 +70,7 @@ function TaxInvoiceKES() {
       ...items,
       {
         partName: "",
-        details: [{ detail: "", quantity: "", cost: "", complimentary: false }],
+        details: [{ detail: "", quantity: "0", cost: "0", complimentary: false }],
       },
     ]);
   };
@@ -92,8 +92,8 @@ function TaxInvoiceKES() {
     const updatedItems = [...items];
     updatedItems[itemIndex].details.push({
       detail: "",
-      quantity: "",
-      cost: "",
+      quantity: "0",
+      cost: "0",
       complimentary: false,
     });
     setItems(updatedItems);
@@ -109,14 +109,19 @@ const handleDetailChange = (itemIndex, detailIndex, event) => {
   const { name, value, type, checked } = event.target;
   const updatedItems = [...items];
 
-  if (type === "checkbox") {
+  if (type === "checkbox" && name === "complimentary") {
     updatedItems[itemIndex].details[detailIndex][name] = checked;
+    if (checked) {
+      updatedItems[itemIndex].details[detailIndex].quantity = 0;
+      updatedItems[itemIndex].details[detailIndex].cost = 0;
+    }
   } else {
     updatedItems[itemIndex].details[detailIndex][name] = value;
   }
 
   setItems(updatedItems);
 };
+
 
 
 
@@ -198,6 +203,7 @@ const handleDetailChange = (itemIndex, detailIndex, event) => {
                   id="billedToGSTIN"
                   name="billedToGSTIN"
                   placeholder="22AAAAA0000A1Z5"
+                  pattern="[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1}"
                 />
               </div>
               <div className="formInputDiv">
@@ -207,6 +213,7 @@ const handleDetailChange = (itemIndex, detailIndex, event) => {
                   id="billedToPAN"
                   name="billedToPAN"
                   placeholder="ABCTY1234D"
+                  pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
                 />
               </div>
             </div>
@@ -304,6 +311,7 @@ const handleDetailChange = (itemIndex, detailIndex, event) => {
                           type="number"
                           id={`quantity${index}-${detailIndex}`}
                           name="quantity"
+                          min="0"
                           value={detail.quantity}
                           onChange={(e) =>
                             handleDetailChange(index, detailIndex, e)
@@ -319,6 +327,7 @@ const handleDetailChange = (itemIndex, detailIndex, event) => {
                           type="number"
                           id={`cost${index}-${detailIndex}`}
                           name="cost"
+                          min="0"
                           value={detail.cost}
                           onChange={(e) =>
                             handleDetailChange(index, detailIndex, e)
