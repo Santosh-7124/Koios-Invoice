@@ -7,10 +7,21 @@
   box-sizing: border-box;
 }
 
+.twoOptionPage {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  padding-top: 80px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
 .Home {
   width: 100%;
   display: flex;
   padding: 80px 160px;
+  padding-top: 0px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -45,9 +56,17 @@
   text-transform: capitalize;
 }
 
-.homeContainer {
+.homeContainerDiv {
+  width: 100%;
   display: flex;
-  padding: 0px 240px;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.homeContainer {
+  width: 100%;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -56,17 +75,16 @@
 }
 
 .homeContainer a {
+  width: 100%;
   display: flex;
   height: 100px;
   padding: 40px 24px;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  align-self: stretch;
   text-decoration: none;
   cursor: pointer;
   gap: 10px;
-  flex: 1 0 0;
   border-radius: 8px;
   border: 5px solid rgba(255, 191, 0, 0.35);
   background: #ffd34f;
@@ -86,16 +104,6 @@
 
 .homeContainer a:hover {
   border: 5px solid #151515;
-}
-
-.twoOptionPage {
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  padding: 80px 0px 125px 0px;
-  flex-direction: column;
-  align-items: center;
-  gap: 21px;
 }
 
 .twoOptionPage .Home {
@@ -386,7 +394,6 @@ label span {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  cursor: pointer;
 }
 
 .formAddButton {
@@ -404,6 +411,7 @@ label span {
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+  cursor: pointer;
 }
 
 .addDetails {
@@ -419,7 +427,6 @@ label span {
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
-  cursor: pointer;
 }
 
 .formDeleteItem {
@@ -492,8 +499,9 @@ select {
   padding: 20px 10px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 24px;
   background: #fff;
+  border-style: inset;
 }
 
 .performaHeading {
@@ -616,7 +624,7 @@ select {
 }
 
 .performaDetailsDateAndNumber .p {
-  color: rgba(17, 17, 17, 0.7);
+  color: rgba(17, 17, 17, 0.85);
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
@@ -653,6 +661,12 @@ select {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: rgba(17, 17, 17, 0.85);
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
 }
 
 .performaDetailsNumber p span {
@@ -664,12 +678,12 @@ select {
 
 .performaDetailsNumber p sub {
   width: 80px;
-  color: rgba(17, 17, 17, 0.7);
+  color: rgba(17, 17, 17, 0.6);
   font-family: Inter;
-  font-size: 12px;
+  font-size: 11px;
   font-style: normal;
-  font-weight: 600;
-  line-height: 16px;
+  font-weight: 500;
+  line-height: 14px;
 }
 
 .performaDetailsContainer {
@@ -836,7 +850,7 @@ select {
   line-height: 14px;
 }
 
-.performaTableSetDetails{
+.performaTableSetDetails {
   width: 70%;
   display: flex;
   flex-direction: column;
@@ -845,8 +859,8 @@ select {
   gap: 8px;
 }
 
-.performaTableSetDetailsSet{
-    width: 100%;
+.performaTableSetDetailsSet {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -871,7 +885,7 @@ select {
   align-self: stretch;
 }
 .performaCostWords {
-  width: 40%;
+  width: 60%;
 }
 
 .performaCostWords p {
@@ -908,7 +922,6 @@ select {
 }
 
 .performaAmountSet {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -948,6 +961,10 @@ select {
   line-height: 14px;
 }
 
+.performaBankDetails .performaDetailsNumber p sub {
+  width: 120px;
+}
+
 .performaBankDetails sub {
   color: rgba(17, 17, 17, 0.9);
   font-family: Inter;
@@ -955,7 +972,6 @@ select {
   font-style: normal;
   font-weight: 600;
   line-height: 14px;
-  text-transform: uppercase;
 }
 
 .performaPaymentDetails {
@@ -1004,12 +1020,10 @@ select {
 }
 
 .performaPaymentDetailsText {
+  padding-left: 20px;
   width: 100%;
   min-height: 100px;
-  border-radius: 8px;
-  padding: 6px;
-  background: #ececec;
-  color: rgba(17, 17, 17, 0.8);
+  color: rgba(17, 17, 17, 0.6);
   font-family: Inter;
   font-size: 11px;
   font-style: normal;

@@ -16,7 +16,9 @@ function TaxInvoiceKESLayout({ data }) {
   const calculateTotalCost = () => {
     let total = 0;
     data.items.forEach((item) => {
-      total += item.Quantity * item.Cost;
+      item.details.forEach((detail) => {
+        total += detail.quantity * detail.cost;
+      });
     });
     return total;
   };
@@ -42,97 +44,7 @@ function TaxInvoiceKESLayout({ data }) {
       <div className="formSection" style={{ alignItems: "center" }}>
         <div className="formSectionHeading">Preview</div>
       </div>
-      <div className="tax-invoice-layout">
-        <div className="invoice-details">
-          <h2>Invoice Details</h2>
-          <p>
-            <strong>Invoice No:</strong> {data.InvoiceNo}
-          </p>
-          <p>
-            <strong>Invoice Date:</strong> {data.InvoiceDate}
-          </p>
-          <p>
-            <strong>Reference Number:</strong> {data.referenceNumber}
-          </p>
-        </div>
-
-        <div className="billed-to">
-          <h2>Billed To</h2>
-          <p>
-            <strong>Company:</strong> {data.billedToCompany}
-          </p>
-          <p>
-            <strong>GSTIN:</strong> {data.billedToGSTIN}
-          </p>
-          <p>
-            <strong>PAN:</strong> {data.billedToPAN}
-          </p>
-          <p>
-            <strong>Address:</strong> {data.billedToAddress}
-          </p>
-          <p>
-            <strong>Phone Number:</strong> {data.billedToPhoneNumber}
-          </p>
-        </div>
-
-        <div className="items">
-          <h2>Items</h2>
-          {data.items.map((item, index) => (
-            <div key={index} className="item">
-              <p>
-                <strong>Service:</strong> {item.partName}
-              </p>
-              <ul>
-                {item.details.map((detail, detailIndex) => (
-                  <li key={detailIndex}>
-                    <p>
-                      <strong>Detail:</strong> {detail.detail}
-                    </p>
-                    <p>
-                      <strong>Quantity:</strong> {detail.quantity}
-                    </p>
-                    <p>
-                      <strong>Cost:</strong> {detail.cost}
-                    </p>
-                    <p>
-                      <strong>Complimentary:</strong>{" "}
-                      {detail.complimentary ? "Yes" : "No"}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="tax-details">
-          <h2>Tax Details</h2>
-          <p>
-            <strong>Tax Type:</strong> {data.Tax}
-          </p>
-          {data.Tax === "SGSTandCGST" && (
-            <>
-              <p>
-                <strong>SGST:</strong> {data.SGST}
-              </p>
-              <p>
-                <strong>CGST:</strong> {data.CGST}
-              </p>
-            </>
-          )}
-          {data.Tax === "IGST" && (
-            <p>
-              <strong>IGST:</strong> {data.IGST}
-            </p>
-          )}
-        </div>
-
-        <div className="payment-terms">
-          <h2>Payment Terms & Conditions</h2>
-          <p>{data.PaymentTermsandConditions}</p>
-        </div>
-      </div>
-      <div className="layout" ref={targetRef}>
+      <div className="layout"  ref={targetRef}>
         <div className="performaDetails">
           <div
             className="performaDetailsDateAndNumber"
@@ -282,6 +194,132 @@ function TaxInvoiceKESLayout({ data }) {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+        <div className="performaCost">
+          <div className="performaCostWords">
+            <p>
+              <span>Total In Words</span> <span>:</span>
+            </p>
+            <p style={{ paddingTop: "8px" }}>
+              {totalCostInWords()} Rupees Only
+            </p>
+          </div>
+          <div className="performaAmount">
+            <div className="performaAmountSet">
+              <p style={{ width: "80px" }}>Sub Total</p>
+              <span>:</span>
+              <p style={{ width: "100px", textAlign: "end" }}>
+                {"₹"} {calculateTotalCost()}
+              </p>
+            </div>
+            {data.Tax === "SGSTandCGST" && (
+              <>
+                <div className="performaAmountSet">
+                  <p style={{ width: "80px" }}>CGST {data.CGST}%</p>
+                  <span>:</span>
+                  <p style={{ width: "100px", textAlign: "end" }}>
+                    {"₹"} {(calculateTotalCost() * data.CGST) / 100}
+                  </p>
+                </div>
+                <div className="performaAmountSet">
+                  <p style={{ width: "80px" }}>SGST {data.SGST}%</p>
+                  <span>:</span>
+                  <p style={{ width: "100px", textAlign: "end" }}>
+                    {"₹"} {(calculateTotalCost() * data.SGST) / 100}
+                  </p>
+                </div>
+                <div className="performaAmountSet">
+                  <sub style={{ width: "80px" }}>Total Amount </sub>
+                  <span>:</span>
+                  <p style={{ width: "100px", textAlign: "end" }}>
+                    {"₹"}{" "}
+                    {(calculateTotalCost() * data.SGST) / 100 +
+                      (calculateTotalCost() * data.CGST) / 100 +
+                      calculateTotalCost()}
+                  </p>
+                </div>
+              </>
+            )}
+            {data.Tax === "IGST" && (
+              <>
+                <div className="performaAmountSet">
+                  <p style={{ width: "80px" }}>IGST {data.IGST}%</p>
+                  <span>:</span>
+                  <p style={{ width: "100px", textAlign: "end" }}>
+                    {"₹"} {(calculateTotalCost() * data.IGST) / 100}
+                  </p>
+                </div>
+                <div className="performaAmountSet">
+                  <sub style={{ width: "80px" }}>Total Amount </sub>
+                  <span>:</span>
+                  <p style={{ width: "100px", textAlign: "end" }}>
+                    {"₹"}{" "}
+                    {(calculateTotalCost() * data.IGST) / 100 +
+                      calculateTotalCost()}
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+        <div className="performaBankDetails">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
+            <sub>Koios Engineering Solutions PVT Ltd</sub>
+            <sub>ICICI Bank</sub>
+          </div>
+          <div className="performaHeadingInfoSub">
+            <div className="performaDetailsNumber">
+              <p>
+                <span>
+                  <sub>IFSC Code</sub>:
+                </span>
+                ICIC0004405
+              </p>
+              <p>
+                <span>
+                  <sub>Account Number</sub>:
+                </span>
+                440505000387
+              </p>
+              <p>
+                <span>
+                  <sub>Account Type</sub>:
+                </span>
+                Current Account
+              </p>
+              <p>
+                <span>
+                  <sub>Branch</sub>:
+                </span>
+                Kanakapura Road
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="performaPaymentDetails">
+          <div className="performaPaymentDetailsLeft">
+            <div className="performaPaymentDetailsHeading">
+              <sub>Terms & Conditions</sub>
+              <span>Payment Terms</span>
+            </div>
+            <ol className="performaPaymentDetailsText">
+              {data.PaymentTermsandConditions.map((term, index) => (
+                <li key={index}>{term.terms}</li>
+              ))}
+            </ol>
+          </div>
+          <div className="performaPaymentDetailsRight">
+            <div className="performaSignature">
+              <img src={Signature}></img>
+            </div>
+            <p>Authorised Signatory</p>
           </div>
         </div>
       </div>

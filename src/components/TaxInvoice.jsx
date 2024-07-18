@@ -20,10 +20,18 @@ function TaxInvoice() {
           <p>which Company?</p>
         </div>
         <div className="homeContainer">
-          <Link to="/TaxInvoice/KES" className="homeOption">
+          <Link
+            to="/TaxInvoice/KES"
+            style={{ width: "50%" }}
+            className="homeOption"
+          >
             <p>Koios Engineering Solutions</p>
           </Link>
-          <Link to="/PerformaInvoice/TKS" className="homeOption">
+          <Link
+            to="/PerformaInvoice/TKS"
+            style={{ width: "50%" }}
+            className="homeOption"
+          >
             <p>The Koios Studio</p>
           </Link>
         </div>

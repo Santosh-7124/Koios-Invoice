@@ -17,19 +17,23 @@ function Home() {
           <span>Choose the </span>
           <p>type of invoice? </p>
         </div>
-        <div className="homeContainer">
-          <Link to="/PerformaInvoice" className="homeOption">
-            <p>Performa Invoice</p>
-          </Link>
-          <Link to="/TaxInvoice" className="homeOption">
-            <p>Tax Invoice</p>
-          </Link>
-          <Link to="/" className="homeOption">
-            <p>Purchase Order</p>
-          </Link>
-          <Link to="/" className="homeOption">
-            <p>Quotation</p>
-          </Link>
+        <div className="homeContainerDiv">
+          <div className="homeContainer">
+            <Link to="/PerformaInvoice" className="homeOption">
+              <p>Performa Invoice</p>
+            </Link>
+            <Link to="/" className="homeOption">
+              <p>Purchase Order</p>
+            </Link>
+          </div>
+          <div className="homeContainer">
+            <Link to="/TaxInvoice" className="homeOption">
+              <p>Tax Invoice</p>
+            </Link>
+            <Link to="/" className="homeOption">
+              <p>Quotation</p>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
