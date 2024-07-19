@@ -501,7 +501,6 @@ select {
   align-items: flex-start;
   gap: 24px;
   background: #fff;
-  border-style: inset;
 }
 
 .performaHeading {

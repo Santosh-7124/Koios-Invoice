@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { Link } from "react-router-dom";
-import TaxInvoiceKESLayout from "./TaxInvoiceKESLayout";
+import TaxInvoiceTKSLayout from "./TaxInvoiceTKSLayout";
 
-function TaxInvoiceKES() {
+function TaxInvoiceTKS() {
   const getTodayDate = () => {
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -31,13 +31,13 @@ function TaxInvoiceKES() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const form = document.getElementById("yourFormId");
+const form = document.getElementById("yourFormId");
 
-    if (form) {
-      setTimeout(() => {
-        form.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100); // Adjust the delay as needed
-    }
+if (form) {
+  setTimeout(() => {
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 100); 
+}
 
     let SGST = "";
     let CGST = "";
@@ -555,10 +555,10 @@ function TaxInvoiceKES() {
         </div>
       </form>
       <div id="yourFormId" style={{ paddingTop: "80px" }}>
-        {formData && <TaxInvoiceKESLayout data={formData} />}
+        {formData && <TaxInvoiceTKSLayout data={formData} />}
       </div>
     </div>
   );
 }
 
-export default TaxInvoiceKES;
+export default TaxInvoiceTKS;

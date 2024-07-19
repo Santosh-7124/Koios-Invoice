@@ -28,7 +28,7 @@ function TaxInvoice() {
             <p>Koios Engineering Solutions</p>
           </Link>
           <Link
-            to="/PerformaInvoice/TKS"
+            to="/TaxInvoice/TKS"
             style={{ width: "50%" }}
             className="homeOption"
           >
