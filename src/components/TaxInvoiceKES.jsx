@@ -36,7 +36,7 @@ function TaxInvoiceKES() {
     if (form) {
       setTimeout(() => {
         form.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100); // Adjust the delay as needed
+      }, 100); 
     }
 
     let SGST = "";

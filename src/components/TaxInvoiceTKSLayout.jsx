@@ -159,7 +159,7 @@ function TaxInvoiceTKSLayout({ data }) {
         <div className="performaTable">
           <div className="performaTableHeading">
             <div className="number">No</div>
-            <div className="partName">Part Name</div>{" "}
+            <div className="partName">Services</div>{" "}
             <div className="performaTableSetDetails">
               <div className="performaTableSetDetailsSet">
                 <div className="detail">Details</div>
