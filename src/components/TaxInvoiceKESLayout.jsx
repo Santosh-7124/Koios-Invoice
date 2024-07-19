@@ -44,7 +44,7 @@ function TaxInvoiceKESLayout({ data }) {
       <div className="formSection" style={{ alignItems: "center" }}>
         <div className="formSectionHeading">Preview</div>
       </div>
-      <div className="layout"  ref={targetRef}>
+      <div className="layout" ref={targetRef}>
         <div className="performaDetails">
           <div
             className="performaDetailsDateAndNumber"
@@ -124,27 +124,35 @@ function TaxInvoiceKESLayout({ data }) {
               <div className="performaDetailsSetContainer">
                 <div className="set">
                   <p>{data.billedToCompany}</p>
-                  <span>{data.billedToAddress}</span>
+                  {data.billedToAddress &&(
+                    <span>{data.billedToAddress}</span>
+                  )}
                 </div>
                 <div className="performaDetailsNumber">
-                  <p>
-                    <span>
-                      <sub>GSTIN</sub>:
-                    </span>
-                    {data.billedToGSTIN}
-                  </p>
-                  <p>
-                    <span>
-                      <sub>PAN No</sub>:
-                    </span>
-                    {data.billedToPAN}
-                  </p>
-                  <p>
-                    <span>
-                      <sub>Mobile</sub>:
-                    </span>
-                    {data.billedToPhoneNumber}
-                  </p>
+                  {data.billedToGSTIN && (
+                    <p>
+                      <span>
+                        <sub>GSTIN</sub>:
+                      </span>
+                      {data.billedToGSTIN}
+                    </p>
+                  )}
+                  {data.billedToPAN && (
+                    <p>
+                      <span>
+                        <sub>PAN No</sub>:
+                      </span>
+                      {data.billedToPAN}
+                    </p>
+                  )}
+                  {data.billedToPhoneNumber && (
+                    <p>
+                      <span>
+                        <sub>Mobile</sub>:
+                      </span>
+                      {data.billedToPhoneNumber}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
