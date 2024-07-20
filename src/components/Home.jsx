@@ -22,8 +22,8 @@ function Home() {
             <Link to="/PerformaInvoice" className="homeOption">
               <p>Performa Invoice</p>
             </Link>
-            <Link to="/" className="homeOption">
-              <p>Purchase Order</p>
+            <Link to="/QuotationInvoice" className="homeOption">
+              <p>Quotation</p>
             </Link>
           </div>
           <div className="homeContainer">
@@ -31,7 +31,7 @@ function Home() {
               <p>Tax Invoice</p>
             </Link>
             <Link to="/" className="homeOption">
-              <p>Quotation</p>
+              <p>Purchase Order</p>
             </Link>
           </div>
         </div>

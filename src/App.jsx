@@ -7,6 +7,8 @@ import PerformaInvoiceTKS from "./components/PerformaInvoiceTKS";
 import TaxInvoice from "./components/TaxInvoice";
 import TaxInvoiceKES from "./components/TaxInvoiceKES";
 import TaxInvoiceTKS from "./components/TaxInvoiceTKS";
+import QuotationInvoice from "./components/QuotationInvoice";
+import QuotationInvoiceKES from "./components/QuotationInvoiceKES";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="TaxInvoice" element={<TaxInvoice />} />
           <Route path="TaxInvoice/KES" element={<TaxInvoiceKES />} />
           <Route path="TaxInvoice/TKS" element={<TaxInvoiceTKS />} />
+          <Route path="QuotationInvoice" element={<QuotationInvoice />} />
+          <Route path="QuotationInvoice/KES" element={<QuotationInvoiceKES />} />
           <Route path="*" element={<Home />} />
         </Route>
       </Routes>

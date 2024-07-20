@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { Link } from "react-router-dom";
-import PerformaInvoiceTKSLayout from "./PerformaInvoiceTKSLayout";
-function PerformaInvoiceTKS() {
+import QuotationInvoiceKESLayout from "./QuotationInvoiceKESLayout";
+
+function QuotationInvoiceKES() {
   const getTodayDate = () => {
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -12,16 +13,22 @@ function PerformaInvoiceTKS() {
     return `${yyyy}-${mm}-${dd}`;
   };
 
-    const [placeOfSupply, setPlaceOfSupply] = useState("Bengaluru");
+  const [placeOfSupply, setPlaceOfSupply] = useState("Bengaluru");
 
-    const handleChange = (event) => {
-      setPlaceOfSupply(event.target.value);
-    };
+  const handleChange = (event) => {
+    setPlaceOfSupply(event.target.value);
+  };
 
   const [shippedPhoneNumberValue, shippedPhoneNumberSetValue] = useState();
   const [billedPhoneNumberValue, billedPhoneNumberSetValue] = useState();
   const [items, setItems] = useState([
-    { partName: "", HSNCode: "", Quantity: "", Cost: "" },
+    {
+      partName: "",
+      HSNCode: "",
+      Quantity: "",
+      Cost: "0",
+      complimentary: false,
+    },
   ]);
 
   const [selectedTax, setSelectedTax] = useState("SGSTandCGST");
@@ -35,29 +42,14 @@ function PerformaInvoiceTKS() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-        const form = document.getElementById("yourFormId");
+    const form = document.getElementById("yourFormId");
 
-        if (form) {
-          setTimeout(() => {
-            form.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 100);
-        }
-
-
-    let shippedToCompany = "";
-    let shippedToGSTIN = "";
-    let shippedToPAN = "";
-    let shippedToAddress = "";
-    let shippedToPhoneNumber = "";
-
-    if (event.target.elements.shippedToDefault.checked) {
-      shippedToCompany = "Koios Engineering Solutions PVT Ltd";
-      shippedToGSTIN = "22AAAAA1234A1Z7";
-      shippedToPAN = "QHYUN1234T";
-      shippedToAddress =
-        "No. 57/D, Balaji Layout, Vajarahalli, Near 100ft road, off Knakapura main road Thalaghattapura, Bangalore South, Bangalore - 560109.";
-      shippedToPhoneNumber = "+911234567890";
+    if (form) {
+      setTimeout(() => {
+        form.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
     }
+
 
     let SGST = "";
     let CGST = "";
@@ -71,22 +63,16 @@ function PerformaInvoiceTKS() {
     }
 
     let formData = {
-      piNo: event.target.elements.piNo.value,
-      piDate: event.target.elements.piDate.value,
+      Subject: event.target.elements.Subject.value,
+      EstimateDate: event.target.elements.EstimateDate.value,
+      ExpiryDate: event.target.elements.ExpiryDate.value,
       leadTime: event.target.elements.leadTime.value,
       referenceNumber: event.target.elements.referenceNumber.value,
-      placeOfSupply: event.target.elements.placeOfSupply.value,
       billedToCompany: event.target.elements.billedToCompany.value,
       billedToGSTIN: event.target.elements.billedToGSTIN.value,
       billedToPAN: event.target.elements.billedToPAN.value,
       billedToAddress: event.target.elements.billedToAddress.value,
       billedToPhoneNumber: billedPhoneNumberValue,
-      shippedToCompany: event.target.elements.shippedToCompany.value,
-      shippedToGSTIN: event.target.elements.shippedToGSTIN.value,
-      shippedToPAN: event.target.elements.shippedToPAN.value,
-      shippedToAddress: event.target.elements.shippedToAddress.value,
-      shippedToPhoneNumber: shippedPhoneNumberValue,
-      shippedToDefault: event.target.elements.shippedToDefault.checked,
       items: items,
       Tax: selectedTax,
       SGST: SGST,
@@ -95,38 +81,37 @@ function PerformaInvoiceTKS() {
       PaymentTermsandConditions: terms,
     };
 
-    if (event.target.elements.shippedToDefault.checked) {
-      formData.shippedToCompany = shippedToCompany;
-      formData.shippedToGSTIN = shippedToGSTIN;
-      formData.shippedToPAN = shippedToPAN;
-      formData.shippedToAddress = shippedToAddress;
-      formData.shippedToPhoneNumber = shippedToPhoneNumber;
-    }
     setFormData(formData);
     console.log("Form Data:", formData);
   };
 
-    const [terms, setTerms] = useState([{ terms: "" }]);
+  const [terms, setTerms] = useState([{ terms: "" }]);
 
-    // Function to handle change in terms input field
-    const handleTermsChange = (index, event) => {
-      const newTerms = [...terms];
-      newTerms[index].terms = event.target.value;
-      setTerms(newTerms);
-    };
+  const handleTermsChange = (index, event) => {
+    const newTerms = [...terms];
+    newTerms[index].terms = event.target.value;
+    setTerms(newTerms);
+  };
 
-    // Function to handle adding new terms
-    const handleAddTerms = () => {
-      setTerms([...terms, { terms: "" }]);
-    };
+  const handleAddTerms = () => {
+    setTerms([...terms, { terms: "" }]);
+  };
 
-    // Function to handle removing terms
-    const handleRemoveTerms = (index) => {
-      setTerms(terms.filter((_, i) => i !== index));
-    };
+  const handleRemoveTerms = (index) => {
+    setTerms(terms.filter((_, i) => i !== index));
+  };
 
   const handleAddItem = () => {
-    setItems([...items, { partName: "", HSNCode: "", Quantity: "", Cost: "" }]);
+    setItems([
+      ...items,
+      {
+        partName: "",
+        HSNCode: "",
+        Quantity: "",
+        Cost: "0",
+        complimentary: false,
+      },
+    ]);
   };
 
   const handleRemoveItem = (index) => {
@@ -136,62 +121,47 @@ function PerformaInvoiceTKS() {
   };
 
   const handleItemChange = (index, event) => {
-    const { name, value } = event.target;
+    const { name, value, type, checked } = event.target;
     const updatedItems = [...items];
-    updatedItems[index][name] = value;
+
+    if (type === "checkbox" && name === "complimentary") {
+      updatedItems[index][name] = checked;
+      if (checked) {
+        updatedItems[index].Quantity = "0";
+        updatedItems[index].Cost = "0";
+      }
+    } else {
+      updatedItems[index][name] = value;
+    }
     setItems(updatedItems);
   };
-
   return (
     <div>
       <div className="heading">
         <div className="breadcrumb">
           <Link to="/">Home</Link>
           <span>{">"}</span>
-          <Link to="/PerformaInvoice ">Performa Invoice </Link>
+          <Link to="/PerformaInvoice ">Quotation Invoice</Link>
           <span>{">"}</span>
-          <p>The Koios Studio</p>
+          <p>Koios Engineering Service</p>
         </div>
-        <p>Performa Invoice</p>
+        <p>Quotation</p>
       </div>
       <form id="PurchaseKES" name="PurchaseKES" onSubmit={handleSubmit}>
         <div className="formContainer">
           <div className="formSection">
+            <div className="formSectionHeading">Billed To</div>
             <div className="formSubSection">
               <div className="formInputDiv">
-                <label htmlFor="piNo">
-                  PI No<span>*</span>
+                <label htmlFor="billedToCompany">
+                  Company<span>*</span>
                 </label>
                 <input
                   required
                   type="text"
-                  id="piNo"
-                  name="piNo"
-                  placeholder="Enter PI No"
-                />
-              </div>
-              <div className="formInputDiv">
-                <label htmlFor="piDate">
-                  PI Date<span>*</span>
-                </label>
-                <input
-                  required
-                  type="date"
-                  id="piDate"
-                  name="piDate"
-                  defaultValue={getTodayDate()}
-                />
-              </div>
-              <div className="formInputDiv">
-                <label htmlFor="leadTime">
-                  Lead Time<span>*</span>
-                </label>
-                <input
-                  required
-                  type="text"
-                  id="leadTime"
-                  name="leadTime"
-                  placeholder="Enter Lead Time"
+                  id="billedToCompany"
+                  name="billedToCompany"
+                  placeholder="Company Here"
                 />
               </div>
             </div>
@@ -208,31 +178,42 @@ function PerformaInvoiceTKS() {
                   placeholder="Reference Number"
                 />
               </div>
-              <div className="formInputDiv">
-                <label htmlFor="placeOfSupply">Place of Supply</label>
-                <input
-                  type="text"
-                  id="placeOfSupply"
-                  name="placeOfSupply"
-                  value={placeOfSupply}
-                  onChange={handleChange}
-                />
-              </div>
             </div>
-          </div>
-          <div className="formSection">
-            <div className="formSectionHeading">Billed To</div>
             <div className="formSubSection">
               <div className="formInputDiv">
-                <label htmlFor="billedToCompany">
-                  Company<span>*</span>
+                <label htmlFor="EstimateDate">
+                  Estimate Date<span>*</span>
+                </label>
+                <input
+                  required
+                  type="date"
+                  id="EstimateDate"
+                  name="EstimateDate"
+                  defaultValue={getTodayDate()}
+                />
+              </div>
+              <div className="formInputDiv">
+                <label htmlFor="ExpiryDate">
+                  Expiry Date<span>*</span>
+                </label>
+                <input
+                  required
+                  type="date"
+                  id="ExpiryDate"
+                  name="ExpiryDate"
+                  defaultValue={getTodayDate()}
+                />
+              </div>
+              <div className="formInputDiv">
+                <label htmlFor="leadTime">
+                  Lead Time<span>*</span>
                 </label>
                 <input
                   required
                   type="text"
-                  id="billedToCompany"
-                  name="billedToCompany"
-                  placeholder="Company Here"
+                  id="leadTime"
+                  name="leadTime"
+                  placeholder="2 months"
                 />
               </div>
             </div>
@@ -266,81 +247,26 @@ function PerformaInvoiceTKS() {
                 />
               </div>
               <div className="formInputDiv">
-                <label htmlFor="billedToPhoneNumber">
-                  Phone Number<span>*</span>
-                </label>
+                <label htmlFor="billedToPhoneNumber">Phone Number</label>
                 <PhoneInput
                   placeholder="Enter phone number"
                   country="IN"
                   value={billedPhoneNumberValue}
-                  required
                   onChange={billedPhoneNumberSetValue}
                   id="billedToPhoneNumber"
                 />
               </div>
             </div>
-          </div>
-          <div className="formSection">
-            <div className="formSectionHeading">Shipped To</div>
             <div className="formSubSection">
               <div className="formInputDiv">
-                <label htmlFor="shippedToCompany">Company</label>
+                <label htmlFor="Subject">Subject</label>
                 <input
                   type="text"
-                  id="shippedToCompany"
-                  name="shippedToCompany"
-                  placeholder="Company Here"
+                  id="Subject"
+                  name="Subject"
+                  placeholder="Subject Here"
                 />
               </div>
-            </div>
-            <div className="formSubSection">
-              <div className="formInputDiv">
-                <label htmlFor="shippedToGSTIN">GSTIN</label>
-                <input
-                  type="text"
-                  id="shippedToGSTIN"
-                  name="shippedToGSTIN"
-                  placeholder="22AAAAA0000A1Z5"
-                />
-              </div>
-              <div className="formInputDiv">
-                <label htmlFor="shippedToPAN">PAN</label>
-                <input
-                  type="text"
-                  id="shippedToPAN"
-                  name="shippedToPAN"
-                  placeholder="ABCTY1234D"
-                />
-              </div>
-            </div>
-            <div className="formSubSection">
-              <div className="formInputDiv">
-                <label htmlFor="shippedToAddress">Address</label>
-                <input
-                  type="text"
-                  id="shippedToAddress"
-                  name="shippedToAddress"
-                />
-              </div>
-              <div className="formInputDiv">
-                <label htmlFor="shippedToPhoneNumber">Phone Number</label>
-                <PhoneInput
-                  placeholder="Enter phone number"
-                  country="IN"
-                  value={shippedPhoneNumberValue}
-                  onChange={shippedPhoneNumberSetValue}
-                  id="shippedToPhoneNumber"
-                />
-              </div>
-            </div>
-            <div className="formCheckBox">
-              <label htmlFor="shippedToDefault">Default</label>
-              <input
-                type="checkbox"
-                id="shippedToDefault"
-                name="shippedToDefault"
-                value="shippedToDefault"
-              />
             </div>
           </div>
           <div className="formSection">
@@ -353,7 +279,7 @@ function PerformaInvoiceTKS() {
                 >
                   <div className="formInputDiv">
                     <label htmlFor={`partName${index}`}>
-                      Part Name<span>*</span>
+                      Description<span>*</span>
                     </label>
                     <input
                       required
@@ -385,29 +311,6 @@ function PerformaInvoiceTKS() {
                 </div>
                 <div className="formSubSection">
                   <div className="formInputDiv">
-                    <label htmlFor={`HSNCode${index}`}>HSN Code</label>
-                    <input
-                      type="text"
-                      id={`HSNCode${index}`}
-                      name="HSNCode"
-                      value={item.HSNCode}
-                      onChange={(e) => handleItemChange(index, e)}
-                    />
-                  </div>
-                  <div className="formInputDiv">
-                    <label htmlFor={`Quantity${index}`}>
-                      Quantity<span>*</span>
-                    </label>
-                    <input
-                      required
-                      type="number"
-                      id={`Quantity${index}`}
-                      name="Quantity"
-                      value={item.Quantity}
-                      onChange={(e) => handleItemChange(index, e)}
-                    />
-                  </div>
-                  <div className="formInputDiv">
                     <label htmlFor={`Cost${index}`}>
                       Cost<span>*</span>
                     </label>
@@ -420,6 +323,29 @@ function PerformaInvoiceTKS() {
                       onChange={(e) => handleItemChange(index, e)}
                     />
                   </div>
+                  <div className="formInputDiv">
+                    <label htmlFor={`HSNCode${index}`}>
+                      Duration<span>*</span>
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      id={`HSNCode${index}`}
+                      name="HSNCode"
+                      value={item.HSNCode}
+                      onChange={(e) => handleItemChange(index, e)}
+                    />
+                  </div>
+                </div>
+                <div className="formCheckBox Complimentary">
+                  <p>Complimentary</p>
+                  <input
+                    type="checkbox"
+                    id={`complimentary${index}`}
+                    name="complimentary"
+                    checked={item.complimentary}
+                    onChange={(e) => handleItemChange(index, e)}
+                  />
                 </div>
               </div>
             ))}
@@ -567,10 +493,10 @@ function PerformaInvoiceTKS() {
         </div>
       </form>
       <div id="yourFormId" style={{ paddingTop: "80px" }}>
-        {formData && <PerformaInvoiceTKSLayout data={formData} />}
+        {formData && <QuotationInvoiceKESLayout data={formData} />}
       </div>
     </div>
   );
 }
 
-export default PerformaInvoiceTKS;
+export default QuotationInvoiceKES;

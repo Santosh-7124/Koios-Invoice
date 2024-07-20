@@ -157,7 +157,7 @@ if (form) {
           <span>{">"}</span>
           <Link to="/TaxInvoice ">Tax Invoice </Link>
           <span>{">"}</span>
-          <p>Koios Engineering Service</p>
+          <p>The Koios Studio</p>
         </div>
         <p>Tax Invoice</p>
       </div>
