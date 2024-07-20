@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { Link } from "react-router-dom";
-import QuotationInvoiceKESLayout from "./QuotationInvoiceKESLayout";
+import QuotationInvoiceTKSLayout from "./QuotationInvoiceTKSLayout";
 
-function QuotationInvoiceKES() {
+function QuotationInvoiceTKS() {
   const getTodayDate = () => {
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -49,7 +49,6 @@ function QuotationInvoiceKES() {
         form.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
     }
-
 
     let SGST = "";
     let CGST = "";
@@ -143,7 +142,7 @@ function QuotationInvoiceKES() {
           <span>{">"}</span>
           <Link to="/PerformaInvoice ">Quotation Invoice</Link>
           <span>{">"}</span>
-          <p>Koios Engineering Service</p>
+          <p>The Koios Studio</p>
         </div>
         <p>Quotation</p>
       </div>
@@ -219,9 +218,11 @@ function QuotationInvoiceKES() {
             </div>
             <div className="formSubSection">
               <div className="formInputDiv">
-                <label htmlFor="billedToGSTIN">GSTIN<span>*</span></label>
+                <label htmlFor="billedToGSTIN">
+                  GSTIN<span>*</span>
+                </label>
                 <input
-                required
+                  required
                   type="text"
                   id="billedToGSTIN"
                   name="billedToGSTIN"
@@ -494,10 +495,10 @@ function QuotationInvoiceKES() {
         </div>
       </form>
       <div id="yourFormId" style={{ paddingTop: "80px" }}>
-        {formData && <QuotationInvoiceKESLayout data={formData} />}
+        {formData && <QuotationInvoiceTKSLayout data={formData} />}
       </div>
     </div>
   );
 }
 
-export default QuotationInvoiceKES;
+export default QuotationInvoiceTKS;

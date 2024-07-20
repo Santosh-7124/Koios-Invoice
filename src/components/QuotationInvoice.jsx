@@ -28,7 +28,7 @@ function QuotationInvoice() {
             <p>Koios Engineering Solutions</p>
           </Link>
           <Link
-            to="/TaxInvoice/TKS"
+            to="/QuotationInvoice/TKS"
             style={{ width: "50%" }}
             className="homeOption"
           >

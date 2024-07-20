@@ -4,20 +4,19 @@ import Signature from "../assets/Signature.png";
 import { toWords } from "number-to-words";
 import { Margin, Resolution, usePDF } from "react-to-pdf";
 
-
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, "0");
-  const month = date.toLocaleString("default", { month: "long" });
-  const year = date.getFullYear();
-  return `${day} ${month}, ${year}`;
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = String(date.getFullYear()).slice(-2);
+  return `${day}/${month}/${year}`;
 };
 
-const PerformaInvoiceTKSLayout = ({ data }) => {
+const QuotationInvoiceTKSLayout = ({ data }) => {
   const calculateTotalCost = () => {
     let total = 0;
     data.items.forEach((item) => {
-      total += item.Quantity * item.Cost;
+      total += 1 * item.Cost;
     });
     return total;
   };
@@ -49,19 +48,19 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
             className="performaDetailsDateAndNumber"
             style={{ background: "#FFF5D9" }}
           >
-            <p className="p">Performa Invoice</p>
+            <p className="p">Quotation</p>
             <div className="performaDetailsNumber">
               <p>
                 <span>
-                  <sub>Date</sub>:
+                  <sub>Estimate Date</sub>:
                 </span>
-                {formatDate(data.piDate)}
+                {formatDate(data.EstimateDate)}
               </p>
               <p>
                 <span>
-                  <sub>Reference</sub>:
+                  <sub>Expiry Date</sub>:
                 </span>
-                {data.referenceNumber}
+                {formatDate(data.ExpiryDate)}
               </p>
               <p>
                 <span>
@@ -71,9 +70,9 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
               </p>
               <p>
                 <span>
-                  <sub>Place of Supply</sub>:
+                  <sub>Reference</sub>:
                 </span>
-                {data.placeOfSupply}
+                {data.referenceNumber}
               </p>
             </div>
           </div>
@@ -116,14 +115,12 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
               </div>
             </div>
           </div>
-          <div
-            className="performaDetailsContainer"
-            style={{ borderTop: "1px solid rgba(17, 17, 17, 0.10)" }}
-          >
+          <div className="performaDetailsContainer">
             <div
               className="performaDetailsSet"
               style={{
                 background: "#fff",
+                borderTop: "1px solid rgba(17, 17, 17, 0.10)",
                 minHeight: "auto",
               }}
             >
@@ -132,88 +129,67 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
                 <div className="set">
                   <p>{data.billedToCompany}</p>
                   {data.billedToAddress && <span>{data.billedToAddress}</span>}
-                  <div className="performaDetailsNumber">
-                    {data.billedToGSTIN && (
-                      <p>
-                        <span>
-                          <sub>GSTIN</sub>:
-                        </span>
-                        {data.billedToGSTIN}
-                      </p>
-                    )}
-                    {data.billedToPAN && (
-                      <p>
-                        <span>
-                          <sub>PAN No</sub>:
-                        </span>
-                        {data.billedToPAN}
-                      </p>
-                    )}
-                    {data.billedToPhoneNumber && (
-                      <p>
-                        <span>
-                          <sub>Mobile</sub>:
-                        </span>
-                        {data.billedToPhoneNumber}
-                      </p>
-                    )}
-                  </div>
                 </div>
-              </div>
-            </div>
-            <div
-              className="performaDetailsSet"
-              style={{
-                background: "#fff",
-                minHeight: "auto",
-              }}
-            >
-              <sub>Shipped To :</sub>
-              <div className="performaDetailsSetContainer">
-                <div className="set">
-                  <p>{data.shippedToCompany}</p>
-                  {data.shippedToAddress && (
-                    <span>{data.shippedToAddress}</span>
+                <div className="performaDetailsNumber">
+                  {data.billedToGSTIN && (
+                    <p>
+                      <span>
+                        <sub>GSTIN</sub>:
+                      </span>
+                      {data.billedToGSTIN}
+                    </p>
                   )}
-                  <div className="performaDetailsNumber">
-                    {data.shippedToGSTIN && (
-                      <p>
-                        <span>
-                          <sub>GSTIN</sub>:
-                        </span>
-                        {data.shippedToGSTIN}
-                      </p>
-                    )}
-                    {data.shippedToPAN && (
-                      <p>
-                        <span>
-                          <sub>PAN No</sub>:
-                        </span>
-                        {data.shippedToPAN}
-                      </p>
-                    )}
-                    {data.shippedToPhoneNumber && (
-                      <p>
-                        <span>
-                          <sub>Mobile</sub>:
-                        </span>
-                        {data.shippedToPhoneNumber}
-                      </p>
-                    )}
-                  </div>
+                  {data.billedToPAN && (
+                    <p>
+                      <span>
+                        <sub>PAN No</sub>:
+                      </span>
+                      {data.billedToPAN}
+                    </p>
+                  )}
+                  {data.billedToPhoneNumber && (
+                    <p>
+                      <span>
+                        <sub>Mobile</sub>:
+                      </span>
+                      {data.billedToPhoneNumber}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
           </div>
+          {data.Subject && (
+            <div className="performaDetailsContainer">
+              <div
+                className="performaDetailsSet"
+                style={{
+                  background: "#fff",
+                  minHeight: "auto",
+                }}
+              >
+                <sub>Subject :</sub>
+                <div className="performaDetailsSetContainer">
+                  <div className="set">
+                    <span style={{ width: "100%" }}>{data.Subject}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
         <div className="performaTable">
           <div className="performaTableHeading">
             <div className="number">No</div>
-            <div className="partName">Part Name</div>
-            <div className="HSNcode">HSN Code</div>
-            <div className="Quantity">Oty</div>
-            <div className="UnitCost">Unit Cost</div>
-            <div className="TotalCost">Total Cost</div>
+            <div className="partName" style={{ width: "30%" }}>
+              Part Name
+            </div>
+            <div className="HSNcode" style={{ width: "30%" }}>
+              Duration
+            </div>
+            <div className="UnitCost" style={{ width: "30%" }}>
+              Cost
+            </div>
           </div>
           <div
             className="performaTableContainer"
@@ -222,11 +198,17 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
             {data.items.map((item, index) => (
               <div className="performaTableSet" key={index}>
                 <div className="number">{index + 1}</div>
-                <div className="partName"> {item.partName}</div>
-                <div className="HSNcode"> {item.HSNCode}</div>
-                <div className="Quantity"> {item.Quantity}</div>
-                <div className="UnitCost">{item.Cost}</div>
-                <div className="TotalCost">{item.Quantity * item.Cost}</div>
+                <div className="partName" style={{ width: "30%" }}>
+                  {" "}
+                  {item.partName}
+                </div>
+                <div className="HSNcode" style={{ width: "30%" }}>
+                  {" "}
+                  {item.HSNCode}
+                </div>
+                <div className="UnitCost" style={{ width: "30%" }}>
+                  {item.complimentary ? "Complimentary" : item.cost}
+                </div>
               </div>
             ))}
           </div>
@@ -240,7 +222,7 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
               {totalCostInWords()} Rupees Only
             </p>
           </div>
-          <div className="performaAmount" style={{ paddingRight: "20px" }}>
+          <div className="performaAmount" style={{ paddingRight: "60px" }}>
             <div className="performaAmountSet">
               <p style={{ width: "80px" }}>Sub Total</p>
               <span>:</span>
@@ -364,4 +346,4 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
   );
 };
 
-export default PerformaInvoiceTKSLayout;
+export default QuotationInvoiceTKSLayout;

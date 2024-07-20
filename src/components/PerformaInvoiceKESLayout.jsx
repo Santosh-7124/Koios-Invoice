@@ -48,7 +48,7 @@ const PerformaInvoiceKESLayout = ({ data }) => {
             className="performaDetailsDateAndNumber"
             style={{ background: "#FFF5D9" }}
           >
-            <p className="p">Tax Invoice</p>
+            <p className="p">Performa Invoice</p>
             <div className="performaDetailsNumber">
               <p>
                 <span>
@@ -115,8 +115,17 @@ const PerformaInvoiceKESLayout = ({ data }) => {
               </div>
             </div>
           </div>
-          <div className="performaDetailsContainer">
-            <div className="performaDetailsSet">
+          <div
+            className="performaDetailsContainer"
+            style={{ borderTop: "1px solid rgba(17, 17, 17, 0.10)" }}
+          >
+            <div
+              className="performaDetailsSet"
+              style={{
+                background: "#fff",
+                minHeight: "auto",
+              }}
+            >
               <sub>Billed To :</sub>
               <div className="performaDetailsSetContainer">
                 <div className="set">
@@ -151,7 +160,13 @@ const PerformaInvoiceKESLayout = ({ data }) => {
                 </div>
               </div>
             </div>
-            <div className="performaDetailsSet">
+            <div
+              className="performaDetailsSet"
+              style={{
+                background: "#fff",
+                minHeight: "auto",
+              }}
+            >
               <sub>Shipped To :</sub>
               <div className="performaDetailsSetContainer">
                 <div className="set">
