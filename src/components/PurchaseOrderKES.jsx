@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { Link } from "react-router-dom";
-import PerformaInvoiceKESLayout from "./PerformaInvoiceKESLayout";
+import PurchaseOrderKESLayout from "./PurchaseOrderKESLayout"
 
-function PerformaInvoiceKES() {
+function PurchaseOrderKES() {
   const getTodayDate = () => {
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -148,11 +148,11 @@ function PerformaInvoiceKES() {
         <div className="breadcrumb">
           <Link to="/">Home</Link>
           <span>{">"}</span>
-          <Link to="/PerformaInvoice ">Performa Invoice </Link>
+          <Link to="/PurchaseOrder ">Purchase Order </Link>
           <span>{">"}</span>
           <p>Koios Engineering Service</p>
         </div>
-        <p>Performa Invoice</p>
+        <p>Purchase Order</p>
       </div>
       <form id="PurchaseKES" name="PurchaseKES" onSubmit={handleSubmit}>
         <div className="formContainer">
@@ -160,7 +160,7 @@ function PerformaInvoiceKES() {
             <div className="formSubSection">
               <div className="formInputDiv">
                 <label htmlFor="piNo">
-                  PI No<span>*</span>
+                  PO No<span>*</span>
                 </label>
                 <input
                   required
@@ -172,7 +172,7 @@ function PerformaInvoiceKES() {
               </div>
               <div className="formInputDiv">
                 <label htmlFor="piDate">
-                  PI Date<span>*</span>
+                  PO Date<span>*</span>
                 </label>
                 <input
                   required
@@ -221,7 +221,7 @@ function PerformaInvoiceKES() {
             </div>
           </div>
           <div className="formSection">
-            <div className="formSectionHeading">Billed To</div>
+            <div className="formSectionHeading">Ordered By</div>
             <div className="formSubSection">
               <div className="formInputDiv">
                 <label htmlFor="billedToCompany">
@@ -281,7 +281,7 @@ function PerformaInvoiceKES() {
             </div>
           </div>
           <div className="formSection">
-            <div className="formSectionHeading">Shipped To</div>
+            <div className="formSectionHeading">Ordered To</div>
             <div className="formSubSection">
               <div className="formInputDiv">
                 <label htmlFor="shippedToCompany">Company</label>
@@ -567,10 +567,10 @@ function PerformaInvoiceKES() {
         </div>
       </form>
       <div id="yourFormId" style={{ paddingTop: "80px" }}>
-        {formData && <PerformaInvoiceKESLayout data={formData} />}
+        {formData && <PurchaseOrderKESLayout data={formData} />}
       </div>
     </div>
   );
 }
 
-export default PerformaInvoiceKES;
+export default PurchaseOrderKES;

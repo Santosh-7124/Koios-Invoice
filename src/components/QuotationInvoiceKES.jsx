@@ -50,7 +50,6 @@ function QuotationInvoiceKES() {
       }, 100);
     }
 
-
     let SGST = "";
     let CGST = "";
     let IGST = "";
@@ -141,7 +140,7 @@ function QuotationInvoiceKES() {
         <div className="breadcrumb">
           <Link to="/">Home</Link>
           <span>{">"}</span>
-          <Link to="/PerformaInvoice ">Quotation Invoice</Link>
+          <Link to="/QuotationInvoice">Quotation Invoice</Link>
           <span>{">"}</span>
           <p>Koios Engineering Service</p>
         </div>
@@ -219,9 +218,21 @@ function QuotationInvoiceKES() {
             </div>
             <div className="formSubSection">
               <div className="formInputDiv">
-                <label htmlFor="billedToGSTIN">GSTIN<span>*</span></label>
+                <label htmlFor="billedToAddress">Address</label>
                 <input
-                required
+                  type="text"
+                  id="billedToAddress"
+                  name="billedToAddress"
+                />
+              </div>
+            </div>
+            <div className="formSubSection">
+              <div className="formInputDiv">
+                <label htmlFor="billedToGSTIN">
+                  GSTIN<span>*</span>
+                </label>
+                <input
+                  required
                   type="text"
                   id="billedToGSTIN"
                   name="billedToGSTIN"
@@ -235,16 +246,6 @@ function QuotationInvoiceKES() {
                   id="billedToPAN"
                   name="billedToPAN"
                   placeholder="ABCTY1234D"
-                />
-              </div>
-            </div>
-            <div className="formSubSection">
-              <div className="formInputDiv">
-                <label htmlFor="billedToAddress">Address</label>
-                <input
-                  type="text"
-                  id="billedToAddress"
-                  name="billedToAddress"
                 />
               </div>
               <div className="formInputDiv">

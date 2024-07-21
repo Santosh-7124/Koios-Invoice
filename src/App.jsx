@@ -10,6 +10,9 @@ import TaxInvoiceTKS from "./components/TaxInvoiceTKS";
 import QuotationInvoice from "./components/QuotationInvoice";
 import QuotationInvoiceKES from "./components/QuotationInvoiceKES";
 import QuotationInvoiceTKS from "./components/QuotationInvoiceTKS";
+import PurchaseOrder from "./components/PurchaseOrder";
+import PurchaseOrderKES from "./components/PurchaseOrderKES";
+import PurchaseOrderTKS from "./components/PurchaseOrderTKS";
 
 function App() {
   return (
@@ -32,6 +35,9 @@ function App() {
             path="QuotationInvoice/TKS"
             element={<QuotationInvoiceTKS />}
           />
+          <Route path="PurchaseOrder" element={<PurchaseOrder />} />
+          <Route path="PurchaseOrder/KES" element={<PurchaseOrderKES />} />
+          <Route path="PurchaseOrder/TKS" element={<PurchaseOrderTKS />} />
           <Route path="*" element={<Home />} />
         </Route>
       </Routes>

@@ -58,6 +58,11 @@ const PerformaInvoiceKESLayout = ({ data }) => {
               </p>
               <p>
                 <span>
+                  <sub>PI No</sub>:
+                </span> {data.piNo}
+              </p>
+              <p>
+                <span>
                   <sub>Reference</sub>:
                 </span>
                 {data.referenceNumber}

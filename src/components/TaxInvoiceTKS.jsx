@@ -31,13 +31,13 @@ function TaxInvoiceTKS() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-const form = document.getElementById("yourFormId");
+    const form = document.getElementById("yourFormId");
 
-if (form) {
-  setTimeout(() => {
-    form.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 100); 
-}
+    if (form) {
+      setTimeout(() => {
+        form.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
 
     let SGST = "";
     let CGST = "";
@@ -221,6 +221,16 @@ if (form) {
             </div>
             <div className="formSubSection">
               <div className="formInputDiv">
+                <label htmlFor="billedToAddress">Address</label>
+                <input
+                  type="text"
+                  id="billedToAddress"
+                  name="billedToAddress"
+                />
+              </div>
+            </div>
+            <div className="formSubSection">
+              <div className="formInputDiv">
                 <label htmlFor="billedToGSTIN">GSTIN</label>
                 <input
                   type="text"
@@ -236,16 +246,6 @@ if (form) {
                   id="billedToPAN"
                   name="billedToPAN"
                   placeholder="ABCTY1234D"
-                />
-              </div>
-            </div>
-            <div className="formSubSection">
-              <div className="formInputDiv">
-                <label htmlFor="billedToAddress">Address</label>
-                <input
-                  type="text"
-                  id="billedToAddress"
-                  name="billedToAddress"
                 />
               </div>
               <div className="formInputDiv">

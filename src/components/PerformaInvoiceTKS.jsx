@@ -12,11 +12,11 @@ function PerformaInvoiceTKS() {
     return `${yyyy}-${mm}-${dd}`;
   };
 
-    const [placeOfSupply, setPlaceOfSupply] = useState("Bengaluru");
+  const [placeOfSupply, setPlaceOfSupply] = useState("Bengaluru");
 
-    const handleChange = (event) => {
-      setPlaceOfSupply(event.target.value);
-    };
+  const handleChange = (event) => {
+    setPlaceOfSupply(event.target.value);
+  };
 
   const [shippedPhoneNumberValue, shippedPhoneNumberSetValue] = useState();
   const [billedPhoneNumberValue, billedPhoneNumberSetValue] = useState();
@@ -35,14 +35,13 @@ function PerformaInvoiceTKS() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-        const form = document.getElementById("yourFormId");
+    const form = document.getElementById("yourFormId");
 
-        if (form) {
-          setTimeout(() => {
-            form.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 100);
-        }
-
+    if (form) {
+      setTimeout(() => {
+        form.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
 
     let shippedToCompany = "";
     let shippedToGSTIN = "";
@@ -51,7 +50,7 @@ function PerformaInvoiceTKS() {
     let shippedToPhoneNumber = "";
 
     if (event.target.elements.shippedToDefault.checked) {
-      shippedToCompany = "Koios Engineering Solutions PVT Ltd";
+      shippedToCompany = "Koios Software Solutions PVT Ltd";
       shippedToGSTIN = "22AAAAA1234A1Z7";
       shippedToPAN = "QHYUN1234T";
       shippedToAddress =
@@ -106,24 +105,24 @@ function PerformaInvoiceTKS() {
     console.log("Form Data:", formData);
   };
 
-    const [terms, setTerms] = useState([{ terms: "" }]);
+  const [terms, setTerms] = useState([{ terms: "" }]);
 
-    // Function to handle change in terms input field
-    const handleTermsChange = (index, event) => {
-      const newTerms = [...terms];
-      newTerms[index].terms = event.target.value;
-      setTerms(newTerms);
-    };
+  // Function to handle change in terms input field
+  const handleTermsChange = (index, event) => {
+    const newTerms = [...terms];
+    newTerms[index].terms = event.target.value;
+    setTerms(newTerms);
+  };
 
-    // Function to handle adding new terms
-    const handleAddTerms = () => {
-      setTerms([...terms, { terms: "" }]);
-    };
+  // Function to handle adding new terms
+  const handleAddTerms = () => {
+    setTerms([...terms, { terms: "" }]);
+  };
 
-    // Function to handle removing terms
-    const handleRemoveTerms = (index) => {
-      setTerms(terms.filter((_, i) => i !== index));
-    };
+  // Function to handle removing terms
+  const handleRemoveTerms = (index) => {
+    setTerms(terms.filter((_, i) => i !== index));
+  };
 
   const handleAddItem = () => {
     setItems([...items, { partName: "", HSNCode: "", Quantity: "", Cost: "" }]);
@@ -238,6 +237,16 @@ function PerformaInvoiceTKS() {
             </div>
             <div className="formSubSection">
               <div className="formInputDiv">
+                <label htmlFor="billedToAddress">Address</label>
+                <input
+                  type="text"
+                  id="billedToAddress"
+                  name="billedToAddress"
+                />
+              </div>
+            </div>
+            <div className="formSubSection">
+              <div className="formInputDiv">
                 <label htmlFor="billedToGSTIN">GSTIN</label>
                 <input
                   type="text"
@@ -253,16 +262,6 @@ function PerformaInvoiceTKS() {
                   id="billedToPAN"
                   name="billedToPAN"
                   placeholder="ABCTY1234D"
-                />
-              </div>
-            </div>
-            <div className="formSubSection">
-              <div className="formInputDiv">
-                <label htmlFor="billedToAddress">Address</label>
-                <input
-                  type="text"
-                  id="billedToAddress"
-                  name="billedToAddress"
                 />
               </div>
               <div className="formInputDiv">
@@ -295,6 +294,16 @@ function PerformaInvoiceTKS() {
             </div>
             <div className="formSubSection">
               <div className="formInputDiv">
+                <label htmlFor="shippedToAddress">Address</label>
+                <input
+                  type="text"
+                  id="shippedToAddress"
+                  name="shippedToAddress"
+                />
+              </div>
+            </div>
+            <div className="formSubSection">
+              <div className="formInputDiv">
                 <label htmlFor="shippedToGSTIN">GSTIN</label>
                 <input
                   type="text"
@@ -310,16 +319,6 @@ function PerformaInvoiceTKS() {
                   id="shippedToPAN"
                   name="shippedToPAN"
                   placeholder="ABCTY1234D"
-                />
-              </div>
-            </div>
-            <div className="formSubSection">
-              <div className="formInputDiv">
-                <label htmlFor="shippedToAddress">Address</label>
-                <input
-                  type="text"
-                  id="shippedToAddress"
-                  name="shippedToAddress"
                 />
               </div>
               <div className="formInputDiv">

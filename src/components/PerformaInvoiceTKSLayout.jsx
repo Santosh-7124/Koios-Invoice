@@ -59,6 +59,12 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
               </p>
               <p>
                 <span>
+                  <sub>PI No</sub>:
+                </span>{" "}
+                {data.piNo}
+              </p>
+              <p>
+                <span>
                   <sub>Reference</sub>:
                 </span>
                 {data.referenceNumber}
@@ -305,7 +311,7 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
               alignItems: "flex-start",
             }}
           >
-            <sub>Koios Engineering Solutions PVT Ltd</sub>
+            <sub>Koios Software Solutions PVT Ltd</sub>
             <sub>ICICI Bank</sub>
           </div>
           <div className="performaHeadingInfoSub">

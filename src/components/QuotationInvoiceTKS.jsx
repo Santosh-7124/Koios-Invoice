@@ -140,7 +140,7 @@ function QuotationInvoiceTKS() {
         <div className="breadcrumb">
           <Link to="/">Home</Link>
           <span>{">"}</span>
-          <Link to="/PerformaInvoice ">Quotation Invoice</Link>
+          <Link to="/QuotationInvoice">Quotation Invoice</Link>
           <span>{">"}</span>
           <p>The Koios Studio</p>
         </div>
@@ -218,6 +218,16 @@ function QuotationInvoiceTKS() {
             </div>
             <div className="formSubSection">
               <div className="formInputDiv">
+                <label htmlFor="billedToAddress">Address</label>
+                <input
+                  type="text"
+                  id="billedToAddress"
+                  name="billedToAddress"
+                />
+              </div>
+            </div>
+            <div className="formSubSection">
+              <div className="formInputDiv">
                 <label htmlFor="billedToGSTIN">
                   GSTIN<span>*</span>
                 </label>
@@ -236,16 +246,6 @@ function QuotationInvoiceTKS() {
                   id="billedToPAN"
                   name="billedToPAN"
                   placeholder="ABCTY1234D"
-                />
-              </div>
-            </div>
-            <div className="formSubSection">
-              <div className="formInputDiv">
-                <label htmlFor="billedToAddress">Address</label>
-                <input
-                  type="text"
-                  id="billedToAddress"
-                  name="billedToAddress"
                 />
               </div>
               <div className="formInputDiv">

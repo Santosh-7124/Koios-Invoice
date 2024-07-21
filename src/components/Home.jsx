@@ -30,7 +30,7 @@ function Home() {
             <Link to="/TaxInvoice" className="homeOption">
               <p>Tax Invoice</p>
             </Link>
-            <Link to="/" className="homeOption">
+            <Link to="/PurchaseOrder" className="homeOption">
               <p>Purchase Order</p>
             </Link>
           </div>

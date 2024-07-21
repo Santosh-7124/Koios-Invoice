@@ -36,7 +36,7 @@ function TaxInvoiceKES() {
     if (form) {
       setTimeout(() => {
         form.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100); 
+      }, 100);
     }
 
     let SGST = "";
@@ -221,6 +221,16 @@ function TaxInvoiceKES() {
             </div>
             <div className="formSubSection">
               <div className="formInputDiv">
+                <label htmlFor="billedToAddress">Address</label>
+                <input
+                  type="text"
+                  id="billedToAddress"
+                  name="billedToAddress"
+                />
+              </div>
+            </div>
+            <div className="formSubSection">
+              <div className="formInputDiv">
                 <label htmlFor="billedToGSTIN">GSTIN</label>
                 <input
                   type="text"
@@ -236,16 +246,6 @@ function TaxInvoiceKES() {
                   id="billedToPAN"
                   name="billedToPAN"
                   placeholder="ABCTY1234D"
-                />
-              </div>
-            </div>
-            <div className="formSubSection">
-              <div className="formInputDiv">
-                <label htmlFor="billedToAddress">Address</label>
-                <input
-                  type="text"
-                  id="billedToAddress"
-                  name="billedToAddress"
                 />
               </div>
               <div className="formInputDiv">
