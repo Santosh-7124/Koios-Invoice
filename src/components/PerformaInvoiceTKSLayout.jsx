@@ -1,5 +1,5 @@
 import React from "react";
-import TKSLogo from "../assets/TKSLogo.png";
+import TKSLogo from "../assets/KESLogo.png";
 import Signature from "../assets/Signature.png";
 import { toWords } from "number-to-words";
 import { Margin, Resolution, usePDF } from "react-to-pdf";

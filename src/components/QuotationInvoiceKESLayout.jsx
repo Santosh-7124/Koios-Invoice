@@ -207,7 +207,7 @@ const QuotationInvoiceKESLayout = ({ data }) => {
                   {item.HSNCode}
                 </div>
                 <div className="UnitCost" style={{ width: "30%" }}>
-                  {item.complimentary ? "Complimentary" : item.cost}
+                  {item.complimentary ? "Complimentary" : item.Cost}
                 </div>
               </div>
             ))}

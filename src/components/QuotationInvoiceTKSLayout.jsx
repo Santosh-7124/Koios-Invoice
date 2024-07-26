@@ -1,5 +1,5 @@
 import React from "react";
-import TKSLogo from "../assets/TKSLogo.png";
+import TKSLogo from "../assets/KESLogo.png";
 import Signature from "../assets/Signature.png";
 import { toWords } from "number-to-words";
 import { Margin, Resolution, usePDF } from "react-to-pdf";
@@ -207,7 +207,7 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
                   {item.HSNCode}
                 </div>
                 <div className="UnitCost" style={{ width: "30%" }}>
-                  {item.complimentary ? "Complimentary" : item.cost}
+                  {item.complimentary ? "Complimentary" : item.Cost}
                 </div>
               </div>
             ))}
