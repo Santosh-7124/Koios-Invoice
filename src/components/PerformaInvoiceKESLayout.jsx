@@ -354,9 +354,6 @@ const PerformaInvoiceKESLayout = ({ data }) => {
             </ol>
           </div>
           <div className="performaPaymentDetailsRight">
-            <div className="performaSignature">
-              <img src={Signature}></img>
-            </div>
             <p>Authorised Signatory</p>
           </div>
         </div>
