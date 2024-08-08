@@ -16,7 +16,7 @@ const QuotationInvoiceKESLayout = ({ data }) => {
   const calculateTotalCost = () => {
     let total = 0;
     data.items.forEach((item) => {
-      total += 1 * item.Cost;
+      total += item.Quantity * item.Cost;
     });
     return total;
   };
@@ -184,12 +184,15 @@ const QuotationInvoiceKESLayout = ({ data }) => {
             <div className="partName" style={{ width: "30%" }}>
               Part Name
             </div>
-            <div className="HSNcode" style={{ width: "30%" }}>
-              Duration
+            <div className="Quantity">
+              {data.CostType === "CostByQuantity" ? "Quantity" : "no of hours"}
             </div>
-            <div className="UnitCost" style={{ width: "30%" }}>
-              Cost
+            <div className="UnitCost">
+              {data.CostType === "CostByQuantity"
+                ? "Unit Cost"
+                : "per hour cost"}
             </div>
+            <div className="TotalCost">Total Cost</div>
           </div>
           <div
             className="performaTableContainer"
@@ -199,15 +202,18 @@ const QuotationInvoiceKESLayout = ({ data }) => {
               <div className="performaTableSet" key={index}>
                 <div className="number">{index + 1}</div>
                 <div className="partName" style={{ width: "30%" }}>
-                  {" "}
                   {item.partName}
                 </div>
-                <div className="HSNcode" style={{ width: "30%" }}>
-                  {" "}
-                  {item.HSNCode}
+                <div className="Quantity">
+                  {item.complimentary ? "Complimentary" : item.Quantity}
                 </div>
-                <div className="UnitCost" style={{ width: "30%" }}>
+                <div className="UnitCost">
                   {item.complimentary ? "Complimentary" : item.Cost}
+                </div>
+                <div className="TotalCost">
+                  {item.complimentary
+                    ? "Complimentary"
+                    : item.Quantity * item.Cost}
                 </div>
               </div>
             ))}
