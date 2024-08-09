@@ -16,7 +16,7 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
   const calculateTotalCost = () => {
     let total = 0;
     data.items.forEach((item) => {
-      total += item.Quantity * item.Cost;
+      total += 1 * item.Cost;
     });
     return total;
   };
@@ -84,7 +84,8 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
             </div>
             <div className="performaHeadingInfo">
               <sub style={{ textTransform: "uppercase" }}>
-                Koios SOFTWARE Solutions PVT Ltd
+                Koios Studio
+                <span>a vertical of Koios Engineering Solutions Pvt. Ltd.</span>
               </sub>
               <div className="performaHeadingInfoSub">
                 <p>
@@ -184,15 +185,12 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
             <div className="partName" style={{ width: "30%" }}>
               Part Name
             </div>
-            <div className="Quantity">
-              {data.CostType === "CostByQuantity" ? "Quantity" : "no of hours"}
+            <div className="HSNcode" style={{ width: "30%" }}>
+              Duration
             </div>
-            <div className="UnitCost">
-              {data.CostType === "CostByQuantity"
-                ? "Unit Cost"
-                : "per hour cost"}
+            <div className="UnitCost" style={{ width: "30%" }}>
+              Cost
             </div>
-            <div className="TotalCost">Total Cost</div>
           </div>
           <div
             className="performaTableContainer"
@@ -202,18 +200,15 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
               <div className="performaTableSet" key={index}>
                 <div className="number">{index + 1}</div>
                 <div className="partName" style={{ width: "30%" }}>
+                  {" "}
                   {item.partName}
                 </div>
-                <div className="Quantity">
-                  {item.complimentary ? "Complimentary" : item.Quantity}
+                <div className="HSNcode" style={{ width: "30%" }}>
+                  {" "}
+                  {item.HSNCode}
                 </div>
-                <div className="UnitCost">
+                <div className="UnitCost" style={{ width: "30%" }}>
                   {item.complimentary ? "Complimentary" : item.Cost}
-                </div>
-                <div className="TotalCost">
-                  {item.complimentary
-                    ? "Complimentary"
-                    : item.Quantity * item.Cost}
                 </div>
               </div>
             ))}

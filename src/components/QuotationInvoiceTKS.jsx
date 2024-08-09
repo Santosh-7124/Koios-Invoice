@@ -25,7 +25,7 @@ function QuotationInvoiceTKS() {
     {
       partName: "",
       HSNCode: "",
-      Quantity: "0",
+      Quantity: "",
       Cost: "0",
       complimentary: false,
     },
@@ -36,12 +36,6 @@ function QuotationInvoiceTKS() {
   const handleTaxChange = (event) => {
     setSelectedTax(event.target.value);
   };
-
-    const [selectedCostType, setSelectedCostType] = useState("CostByQuantity");
-
-    const handleCostTypeChange = (event) => {
-      setSelectedCostType(event.target.value);
-    };
 
   const [formData, setFormData] = useState(null);
 
@@ -78,7 +72,6 @@ function QuotationInvoiceTKS() {
       billedToPAN: event.target.elements.billedToPAN.value,
       billedToAddress: event.target.elements.billedToAddress.value,
       billedToPhoneNumber: billedPhoneNumberValue,
-      CostType: selectedCostType,
       items: items,
       Tax: selectedTax,
       SGST: SGST,
@@ -113,7 +106,7 @@ function QuotationInvoiceTKS() {
       {
         partName: "",
         HSNCode: "",
-        Quantity: "0",
+        Quantity: "",
         Cost: "0",
         complimentary: false,
       },
@@ -279,23 +272,6 @@ function QuotationInvoiceTKS() {
             </div>
           </div>
           <div className="formSection">
-            <div className="formSectionHeading">Cost Type</div>
-            <div className="formSubSection">
-              <div className="formInputDiv">
-                <label htmlFor="Tax">Choose the Cost Type</label>
-                <select
-                  name="CostType"
-                  id="CostType"
-                  value={selectedCostType}
-                  onChange={handleCostTypeChange}
-                >
-                  <option value="CostByQuantity">Cost by Quantity</option>
-                  <option value="CostByHour">Cost by Hour</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div className="formSection">
             <div className="formSectionHeading">Items</div>
             {items.map((item, index) => (
               <div className="formItems" key={index}>
@@ -337,27 +313,8 @@ function QuotationInvoiceTKS() {
                 </div>
                 <div className="formSubSection">
                   <div className="formInputDiv">
-                    <label htmlFor={`Quantity${index}`}>
-                      {selectedCostType === "CostByQuantity"
-                        ? "Quantity"
-                        : "No. of hours"}
-                      <span>*</span>
-                    </label>
-                    <input
-                      required
-                      type="number"
-                      id={`Quantity${index}`}
-                      name="Quantity"
-                      value={item.Quantity}
-                      onChange={(e) => handleItemChange(index, e)}
-                    />
-                  </div>
-                  <div className="formInputDiv">
                     <label htmlFor={`Cost${index}`}>
-                      {selectedCostType === "CostByQuantity"
-                        ? "Unit Cost"
-                        : "Cost / hour"}
-                      <span>*</span>
+                      Cost<span>*</span>
                     </label>
                     <input
                       required
@@ -365,6 +322,19 @@ function QuotationInvoiceTKS() {
                       id={`Cost${index}`}
                       name="Cost"
                       value={item.Cost}
+                      onChange={(e) => handleItemChange(index, e)}
+                    />
+                  </div>
+                  <div className="formInputDiv">
+                    <label htmlFor={`HSNCode${index}`}>
+                      Duration<span>*</span>
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      id={`HSNCode${index}`}
+                      name="HSNCode"
+                      value={item.HSNCode}
                       onChange={(e) => handleItemChange(index, e)}
                     />
                   </div>

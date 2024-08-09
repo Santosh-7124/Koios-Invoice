@@ -91,7 +91,8 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
             </div>
             <div className="performaHeadingInfo">
               <sub style={{ textTransform: "uppercase" }}>
-                Koios SOFTWARE Solutions PVT Ltd
+                Koios Studio
+                <span>a vertical of Koios Engineering Solutions Pvt. Ltd.</span>
               </sub>
               <div className="performaHeadingInfoSub">
                 <p>
