@@ -14,8 +14,7 @@ function PerformaInvoiceKES() {
   ]);
   const [selectedTax, setSelectedTax] = useState("SGSTandCGST");
   const [selectedCostType, setSelectedCostType] = useState("CostByQuantity");
-  const [selectedShippingOption, setSelectedShippingOption] =
-    useState("default");
+  const [selectedShippingOption, setSelectedShippingOption] = useState(null);
   const [formData, setFormData] = useState(null);
   const [terms, setTerms] = useState([{ terms: "" }]);
 
@@ -39,9 +38,13 @@ function PerformaInvoiceKES() {
     setSelectedCostType(event.target.value);
   };
 
-  const handleShippingOptionChange = (event) => {
-    setSelectedShippingOption(event.target.value);
-  };
+const handleRadioClick = (value) => {
+  if (selectedShippingOption === value) {
+    setSelectedShippingOption(null);
+  } else {
+    setSelectedShippingOption(value);
+  }
+};
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -60,7 +63,6 @@ function PerformaInvoiceKES() {
     let shippedToAddress = "";
     let shippedToPhoneNumber = "";
 
-    // Check selected radio button value
     if (selectedShippingOption === "default") {
       shippedToCompany = "Koios Engineering Solutions PVT Ltd";
       shippedToGSTIN = "22AAAAA1234A1Z7";
@@ -74,6 +76,12 @@ function PerformaInvoiceKES() {
       shippedToPAN = event.target.elements.billedToPAN.value;
       shippedToAddress = event.target.elements.billedToAddress.value;
       shippedToPhoneNumber = billedPhoneNumberValue;
+    } else {
+      shippedToCompany = event.target.elements.shippedToCompany.value;
+      shippedToGSTIN = event.target.elements.shippedToGSTIN.value;
+      shippedToPAN = event.target.elements.shippedToPAN.value;
+      shippedToAddress = event.target.elements.shippedToAddress.value;
+      shippedToPhoneNumber = shippedPhoneNumberValue;
     }
 
     let SGST = "";
@@ -110,7 +118,7 @@ function PerformaInvoiceKES() {
       SGST: SGST,
       CGST: CGST,
       IGST: IGST,
-      showBankDetail:event.target.elements.showBankDetail.checked,
+      showBankDetail: event.target.elements.showBankDetail.checked,
       PaymentTermsandConditions: terms,
     };
 
@@ -348,7 +356,7 @@ function PerformaInvoiceKES() {
                   name="shippingOption"
                   value="default"
                   checked={selectedShippingOption === "default"}
-                  onChange={handleShippingOptionChange}
+                  onClick={() => handleRadioClick("default")}
                 />
                 <label htmlFor="shippedToDefault">Same as default</label>
               </div>
@@ -359,7 +367,7 @@ function PerformaInvoiceKES() {
                   name="shippingOption"
                   value="toBilledAddress"
                   checked={selectedShippingOption === "toBilledAddress"}
-                  onChange={handleShippingOptionChange}
+                  onClick={() => handleRadioClick("toBilledAddress")}
                 />
                 <label htmlFor="shippedToBilledAddress">
                   Shipped to Billed Address

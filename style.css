@@ -326,6 +326,8 @@ label span {
   width: auto;
   align-self: auto;
   cursor: pointer;
+  width: 16px;
+  height: 16px;
 }
 
 .formCheckBox {
@@ -335,8 +337,8 @@ label span {
 }
 
 .formCheckBox input {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   border: 1px solid rgba(17, 17, 17, 0.6);
 }
 
