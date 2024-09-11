@@ -59,11 +59,12 @@ const PerformaInvoiceKESLayout = ({ data }) => {
               <p>
                 <span>
                   <sub>PI No</sub>:
-                </span> {data.piNo}
+                </span>{" "}
+                {data.piNo}
               </p>
               <p>
                 <span>
-                  <sub>Reference</sub>:
+                  <sub>Reference No.</sub>:
                 </span>
                 {data.referenceNumber}
               </p>
@@ -213,10 +214,16 @@ const PerformaInvoiceKESLayout = ({ data }) => {
         <div className="performaTable">
           <div className="performaTableHeading">
             <div className="number">No</div>
-            <div className="partName">Part Name</div>
+            <div className="partName">Description</div>
             <div className="HSNcode">HSN Code</div>
-            <div className="Quantity">Oty</div>
-            <div className="UnitCost">Unit Cost</div>
+            <div className="Quantity">
+              {data.CostType === "CostByQuantity" ? "Quantity" : "no of hours"}
+            </div>
+            <div className="UnitCost">
+              {data.CostType === "CostByQuantity"
+                ? "Unit Cost"
+                : "per hour cost"}
+            </div>
             <div className="TotalCost">Total Cost</div>
           </div>
           <div
@@ -301,46 +308,49 @@ const PerformaInvoiceKESLayout = ({ data }) => {
             )}
           </div>
         </div>
-        <div className="performaBankDetails">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <sub>Koios Engineering Solutions PVT Ltd</sub>
-            <sub>ICICI Bank</sub>
-          </div>
-          <div className="performaHeadingInfoSub">
-            <div className="performaDetailsNumber">
-              <p>
-                <span>
-                  <sub>IFSC Code</sub>:
-                </span>
-                ICIC0004405
-              </p>
-              <p>
-                <span>
-                  <sub>Account Number</sub>:
-                </span>
-                440505000387
-              </p>
-              <p>
-                <span>
-                  <sub>Account Type</sub>:
-                </span>
-                Current Account
-              </p>
-              <p>
-                <span>
-                  <sub>Branch</sub>:
-                </span>
-                Kanakapura Road
-              </p>
+        {data.showBankDetail && (
+          <div className="performaBankDetails">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <sub>Koios Engineering Solutions PVT Ltd</sub>
+              <sub>ICICI Bank</sub>
+            </div>
+            <div className="performaHeadingInfoSub">
+              <div className="performaDetailsNumber">
+                <p>
+                  <span>
+                    <sub>IFSC Code</sub>:
+                  </span>
+                  ICIC0004405
+                </p>
+                <p>
+                  <span>
+                    <sub>Account Number</sub>:
+                  </span>
+                  440505000387
+                </p>
+                <p>
+                  <span>
+                    <sub>Account Type</sub>:
+                  </span>
+                  Current Account
+                </p>
+                <p>
+                  <span>
+                    <sub>Branch</sub>:
+                  </span>
+                  Kanakapura Road
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
         <div className="performaPaymentDetails">
           <div className="performaPaymentDetailsLeft">
             <div className="performaPaymentDetailsHeading">

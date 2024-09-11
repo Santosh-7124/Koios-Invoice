@@ -27,6 +27,12 @@ function TaxInvoiceKES() {
     setSelectedTax(event.target.value);
   };
 
+   const [selectedCostType, setSelectedCostType] = useState("CostByQuantity");
+
+   const handleCostTypeChange = (event) => {
+     setSelectedCostType(event.target.value);
+   };
+
   const [formData, setFormData] = useState(null);
 
   const handleSubmit = (event) => {
@@ -59,6 +65,7 @@ function TaxInvoiceKES() {
       billedToPAN: event.target.elements.billedToPAN.value,
       billedToAddress: event.target.elements.billedToAddress.value,
       billedToPhoneNumber: billedPhoneNumberValue,
+      CostType: selectedCostType,
       items: items,
       Tax: selectedTax,
       SGST: SGST,
@@ -257,6 +264,23 @@ function TaxInvoiceKES() {
                   onChange={billedPhoneNumberSetValue}
                   id="billedToPhoneNumber"
                 />
+              </div>
+            </div>
+          </div>
+          <div className="formSection">
+            <div className="formSectionHeading">Cost Type</div>
+            <div className="formSubSection">
+              <div className="formInputDiv">
+                <label htmlFor="Tax">Choose the Cost Type</label>
+                <select
+                  name="CostType"
+                  id="CostType"
+                  value={selectedCostType}
+                  onChange={handleCostTypeChange}
+                >
+                  <option value="CostByQuantity">Cost by Quantity</option>
+                  <option value="CostByHour">Cost by Hour</option>
+                </select>
               </div>
             </div>
           </div>

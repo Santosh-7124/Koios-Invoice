@@ -70,7 +70,7 @@ const QuotationInvoiceKESLayout = ({ data }) => {
               </p>
               <p>
                 <span>
-                  <sub>Reference</sub>:
+                  <sub>Quotation No.</sub>:
                 </span>
                 {data.referenceNumber}
               </p>

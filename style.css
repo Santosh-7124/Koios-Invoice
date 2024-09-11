@@ -309,6 +309,25 @@ label span {
   width: 100%;
 }
 
+.formRadioSection{
+  width: 100%;
+  display: flex;
+  gap: 40px;
+}
+
+.formRadioSection .formInputDiv{
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.formRadioSection .formInputDiv input{
+  width: auto;
+  align-self: auto;
+  cursor: pointer;
+}
+
 .formCheckBox {
   display: flex;
   align-items: center;

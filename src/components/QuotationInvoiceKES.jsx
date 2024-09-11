@@ -174,7 +174,7 @@ function QuotationInvoiceKES() {
             <div className="formSubSection">
               <div className="formInputDiv">
                 <label htmlFor="referenceNumber">
-                  Reference Number<span>*</span>
+                  Quotation Number<span>*</span>
                 </label>
                 <input
                   required

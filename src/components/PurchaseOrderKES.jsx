@@ -31,6 +31,12 @@ function PurchaseOrderKES() {
     setSelectedTax(event.target.value);
   };
 
+    const [selectedCostType, setSelectedCostType] = useState("CostByQuantity");
+
+    const handleCostTypeChange = (event) => {
+      setSelectedCostType(event.target.value);
+    };
+
   const [formData, setFormData] = useState(null);
 
   const handleSubmit = (event) => {
@@ -87,6 +93,7 @@ function PurchaseOrderKES() {
       shippedToAddress: event.target.elements.shippedToAddress.value,
       shippedToPhoneNumber: shippedPhoneNumberValue,
       shippedToDefault: event.target.elements.shippedToDefault.checked,
+      CostType: selectedCostType,
       items: items,
       Tax: selectedTax,
       SGST: SGST,
@@ -341,6 +348,23 @@ function PurchaseOrderKES() {
                 name="shippedToDefault"
                 value="shippedToDefault"
               />
+            </div>
+          </div>
+          <div className="formSection">
+            <div className="formSectionHeading">Cost Type</div>
+            <div className="formSubSection">
+              <div className="formInputDiv">
+                <label htmlFor="Tax">Choose the Cost Type</label>
+                <select
+                  name="CostType"
+                  id="CostType"
+                  value={selectedCostType}
+                  onChange={handleCostTypeChange}
+                >
+                  <option value="CostByQuantity">Cost by Quantity</option>
+                  <option value="CostByHour">Cost by Hour</option>
+                </select>
+              </div>
             </div>
           </div>
           <div className="formSection">
