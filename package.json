@@ -16,6 +16,7 @@
     "react-phone-number-input": "^3.4.3",
     "react-router-dom": "^6.24.1",
     "react-to-pdf": "^1.0.1",
+    "rupeesinword": "^1.1.1",
     "to-words": "^4.0.1"
   },
   "devDependencies": {

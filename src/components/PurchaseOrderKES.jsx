@@ -2,9 +2,22 @@ import React, { useState } from "react";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { Link } from "react-router-dom";
-import PurchaseOrderKESLayout from "./PurchaseOrderKESLayout"
+import PurchaseOrderKESLayout from "./PurchaseOrderKESLayout";
 
 function PurchaseOrderKES() {
+  // State declarations
+  const [placeOfSupply, setPlaceOfSupply] = useState("Bengaluru");
+  const [shippedPhoneNumberValue, shippedPhoneNumberSetValue] = useState();
+  const [billedPhoneNumberValue, billedPhoneNumberSetValue] = useState();
+  const [items, setItems] = useState([
+    { partName: "", HSNCode: "", Quantity: "", Cost: "" },
+  ]);
+  const [selectedTax, setSelectedTax] = useState("SGSTandCGST");
+  const [selectedCostType, setSelectedCostType] = useState("CostByQuantity");
+  const [selectedShippingOption, setSelectedShippingOption] = useState(null);
+  const [formData, setFormData] = useState(null);
+  const [terms, setTerms] = useState([{ terms: "" }]);
+
   const getTodayDate = () => {
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -13,31 +26,25 @@ function PurchaseOrderKES() {
     return `${yyyy}-${mm}-${dd}`;
   };
 
-  const [placeOfSupply, setPlaceOfSupply] = useState("Bengaluru");
-
   const handleChange = (event) => {
     setPlaceOfSupply(event.target.value);
   };
-
-  const [shippedPhoneNumberValue, shippedPhoneNumberSetValue] = useState();
-  const [billedPhoneNumberValue, billedPhoneNumberSetValue] = useState();
-  const [items, setItems] = useState([
-    { partName: "", HSNCode: "", Quantity: "", Cost: "" },
-  ]);
-
-  const [selectedTax, setSelectedTax] = useState("SGSTandCGST");
 
   const handleTaxChange = (event) => {
     setSelectedTax(event.target.value);
   };
 
-    const [selectedCostType, setSelectedCostType] = useState("CostByQuantity");
+  const handleCostTypeChange = (event) => {
+    setSelectedCostType(event.target.value);
+  };
 
-    const handleCostTypeChange = (event) => {
-      setSelectedCostType(event.target.value);
-    };
-
-  const [formData, setFormData] = useState(null);
+  const handleRadioClick = (value) => {
+    if (selectedShippingOption === value) {
+      setSelectedShippingOption(null);
+    } else {
+      setSelectedShippingOption(value);
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -56,13 +63,25 @@ function PurchaseOrderKES() {
     let shippedToAddress = "";
     let shippedToPhoneNumber = "";
 
-    if (event.target.elements.shippedToDefault.checked) {
+    if (selectedShippingOption === "default") {
       shippedToCompany = "Koios Engineering Solutions PVT Ltd";
       shippedToGSTIN = "22AAAAA1234A1Z7";
       shippedToPAN = "QHYUN1234T";
       shippedToAddress =
         "No. 57/D, Balaji Layout, Vajarahalli, Near 100ft road, off Knakapura main road Thalaghattapura, Bangalore South, Bangalore - 560109.";
       shippedToPhoneNumber = "+911234567890";
+    } else if (selectedShippingOption === "toBilledAddress") {
+      shippedToCompany = event.target.elements.billedToCompany.value;
+      shippedToGSTIN = event.target.elements.billedToGSTIN.value;
+      shippedToPAN = event.target.elements.billedToPAN.value;
+      shippedToAddress = event.target.elements.billedToAddress.value;
+      shippedToPhoneNumber = billedPhoneNumberValue;
+    } else {
+      shippedToCompany = event.target.elements.shippedToCompany.value;
+      shippedToGSTIN = event.target.elements.shippedToGSTIN.value;
+      shippedToPAN = event.target.elements.shippedToPAN.value;
+      shippedToAddress = event.target.elements.shippedToAddress.value;
+      shippedToPhoneNumber = shippedPhoneNumberValue;
     }
 
     let SGST = "";
@@ -87,47 +106,36 @@ function PurchaseOrderKES() {
       billedToPAN: event.target.elements.billedToPAN.value,
       billedToAddress: event.target.elements.billedToAddress.value,
       billedToPhoneNumber: billedPhoneNumberValue,
-      shippedToCompany: event.target.elements.shippedToCompany.value,
-      shippedToGSTIN: event.target.elements.shippedToGSTIN.value,
-      shippedToPAN: event.target.elements.shippedToPAN.value,
-      shippedToAddress: event.target.elements.shippedToAddress.value,
-      shippedToPhoneNumber: shippedPhoneNumberValue,
-      shippedToDefault: event.target.elements.shippedToDefault.checked,
+      shippedToCompany: shippedToCompany,
+      shippedToGSTIN: shippedToGSTIN,
+      shippedToPAN: shippedToPAN,
+      shippedToAddress: shippedToAddress,
+      shippedToPhoneNumber: shippedToPhoneNumber,
+      shippedToDefault: selectedShippingOption,
       CostType: selectedCostType,
       items: items,
       Tax: selectedTax,
       SGST: SGST,
       CGST: CGST,
       IGST: IGST,
+      showBankDetail: event.target.elements.showBankDetail.checked,
       PaymentTermsandConditions: terms,
     };
 
-    if (event.target.elements.shippedToDefault.checked) {
-      formData.shippedToCompany = shippedToCompany;
-      formData.shippedToGSTIN = shippedToGSTIN;
-      formData.shippedToPAN = shippedToPAN;
-      formData.shippedToAddress = shippedToAddress;
-      formData.shippedToPhoneNumber = shippedToPhoneNumber;
-    }
     setFormData(formData);
     console.log("Form Data:", formData);
   };
 
-  const [terms, setTerms] = useState([{ terms: "" }]);
-
-  // Function to handle change in terms input field
   const handleTermsChange = (index, event) => {
     const newTerms = [...terms];
     newTerms[index].terms = event.target.value;
     setTerms(newTerms);
   };
 
-  // Function to handle adding new terms
   const handleAddTerms = () => {
     setTerms([...terms, { terms: "" }]);
   };
 
-  // Function to handle removing terms
   const handleRemoveTerms = (index) => {
     setTerms(terms.filter((_, i) => i !== index));
   };
@@ -340,14 +348,31 @@ function PurchaseOrderKES() {
                 />
               </div>
             </div>
-            <div className="formCheckBox">
-              <label htmlFor="shippedToDefault">Default</label>
-              <input
-                type="checkbox"
-                id="shippedToDefault"
-                name="shippedToDefault"
-                value="shippedToDefault"
-              />
+            <div className="formRadioSection">
+              <div className="formInputDiv">
+                <input
+                  type="radio"
+                  id="shippedToDefault"
+                  name="shippingOption"
+                  value="default"
+                  checked={selectedShippingOption === "default"}
+                  onClick={() => handleRadioClick("default")}
+                />
+                <label htmlFor="shippedToDefault">Same as default</label>
+              </div>
+              <div className="formInputDiv">
+                <input
+                  type="radio"
+                  id="shippedToBilledAddress"
+                  name="shippingOption"
+                  value="toBilledAddress"
+                  checked={selectedShippingOption === "toBilledAddress"}
+                  onClick={() => handleRadioClick("toBilledAddress")}
+                />
+                <label htmlFor="shippedToBilledAddress">
+                  Shipped to Billed Address
+                </label>
+              </div>
             </div>
           </div>
           <div className="formSection">
@@ -527,6 +552,19 @@ function PurchaseOrderKES() {
             )}
           </div>
           <div className="formSection">
+            <div className="formSectionHeading">Bank Details</div>
+            <div className="formCheckBox">
+              <label htmlFor="showBankDetail">Show Bank Detals</label>
+              <input
+                type="checkbox"
+                id="showBankDetail"
+                name="showBankDetail"
+                value="showBankDetail"
+              />
+            </div>
+          </div>
+          <div className="formSection">
+            <div className="formSectionHeading">Payment Terms & Conditions</div>
             {terms.map((termscondition, termsconditionIndex) => (
               <div
                 className="formSubSection"

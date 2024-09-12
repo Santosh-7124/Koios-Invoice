@@ -1,8 +1,8 @@
 import React from "react";
 import KESLogo from "../assets/KESLogo.png";
-import Signature from "../assets/Signature.png";
-import { toWords } from "number-to-words";
+import rupeesInWords from "rupeesinword";
 import { Margin, Resolution, usePDF } from "react-to-pdf";
+
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -21,21 +21,35 @@ const PurchaseOrderKESLayout = ({ data }) => {
     return total;
   };
 
-  const totalCostInWords = () => {
-    let total = calculateTotalCost();
-    if (data.Tax === "SGSTandCGST") {
-      total = (total * data.CGST) / 100 + (total * data.SGST) / 100 + total;
-    } else {
-      total = (total * data.IGST) / 100 + total;
-    }
-    return toWords(total);
-  };
+
+
+const totalCostInWords = () => {
+  let total = calculateTotalCost();
+
+  if (data.Tax === "SGSTandCGST") {
+    total = (total * data.CGST) / 100 + (total * data.SGST) / 100 + total;
+  } else {
+    total = (total * data.IGST) / 100 + total;
+  }
+
+  return rupeesInWords(Math.round(total));
+};
+
 
   const { toPDF, targetRef } = usePDF({
     method: "save",
     filename: "usepdf-example.pdf",
     page: { margin: Margin.NONE, resolution: Resolution.HIGH, size: "A1" },
   });
+
+
+  const formatIndianNumber = (number) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "decimal",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0, 
+    }).format(number);
+  };
 
   return (
     <div className="containerBig" id="containerBig">
@@ -214,10 +228,16 @@ const PurchaseOrderKESLayout = ({ data }) => {
         <div className="performaTable">
           <div className="performaTableHeading">
             <div className="number">No</div>
-            <div className="partName">Part Name</div>
+            <div className="partName">Description</div>
             <div className="HSNcode">HSN Code</div>
-            <div className="Quantity">Oty</div>
-            <div className="UnitCost">Unit Cost</div>
+            <div className="Quantity">
+              {data.CostType === "CostByQuantity" ? "Quantity" : "no of hours"}
+            </div>
+            <div className="UnitCost">
+              {data.CostType === "CostByQuantity"
+                ? "Unit Cost"
+                : "per hour cost"}
+            </div>
             <div className="TotalCost">Total Cost</div>
           </div>
           <div
@@ -230,8 +250,10 @@ const PurchaseOrderKESLayout = ({ data }) => {
                 <div className="partName"> {item.partName}</div>
                 <div className="HSNcode"> {item.HSNCode}</div>
                 <div className="Quantity"> {item.Quantity}</div>
-                <div className="UnitCost">{item.Cost}</div>
-                <div className="TotalCost">{item.Quantity * item.Cost}</div>
+                <div className="UnitCost">{formatIndianNumber(item.Cost)}</div>
+                <div className="TotalCost">
+                  {formatIndianNumber(item.Quantity * item.Cost)}
+                </div>
               </div>
             ))}
           </div>
@@ -250,7 +272,7 @@ const PurchaseOrderKESLayout = ({ data }) => {
               <p style={{ width: "80px" }}>Sub Total</p>
               <span>:</span>
               <p style={{ width: "100px", textAlign: "end" }}>
-                {calculateTotalCost()}
+                {formatIndianNumber(calculateTotalCost())}
               </p>
             </div>
             {data.Tax === "SGSTandCGST" && (
@@ -259,23 +281,29 @@ const PurchaseOrderKESLayout = ({ data }) => {
                   <p style={{ width: "80px" }}>CGST {data.CGST}%</p>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {(calculateTotalCost() * data.CGST) / 100}
+                    {formatIndianNumber(
+                      (calculateTotalCost() * data.CGST) / 100
+                    )}
                   </p>
                 </div>
                 <div className="performaAmountSet">
                   <p style={{ width: "80px" }}>SGST {data.SGST}%</p>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {(calculateTotalCost() * data.SGST) / 100}
+                    {formatIndianNumber(
+                      (calculateTotalCost() * data.SGST) / 100
+                    )}
                   </p>
                 </div>
                 <div className="performaAmountSet">
                   <sub style={{ width: "80px" }}>Total Amount </sub>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {(calculateTotalCost() * data.SGST) / 100 +
-                      (calculateTotalCost() * data.CGST) / 100 +
-                      calculateTotalCost()}
+                    {formatIndianNumber(
+                      (calculateTotalCost() * data.SGST) / 100 +
+                        (calculateTotalCost() * data.CGST) / 100 +
+                        calculateTotalCost()
+                    )}
                   </p>
                 </div>
               </>
@@ -302,46 +330,50 @@ const PurchaseOrderKESLayout = ({ data }) => {
             )}
           </div>
         </div>
-        <div className="performaBankDetails">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <sub>Koios Engineering Solutions PVT Ltd</sub>
-            <sub>ICICI Bank</sub>
-          </div>
-          <div className="performaHeadingInfoSub">
-            <div className="performaDetailsNumber">
-              <p>
-                <span>
-                  <sub>IFSC Code</sub>:
-                </span>
-                ICIC0004405
-              </p>
-              <p>
-                <span>
-                  <sub>Account Number</sub>:
-                </span>
-                440505000387
-              </p>
-              <p>
-                <span>
-                  <sub>Account Type</sub>:
-                </span>
-                Current Account
-              </p>
-              <p>
-                <span>
-                  <sub>Branch</sub>:
-                </span>
-                Kanakapura Road
-              </p>
+
+        {data.showBankDetail && (
+          <div className="performaBankDetails">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <sub>Koios Engineering Solutions PVT Ltd</sub>
+              <sub>ICICI Bank</sub>
+            </div>
+            <div className="performaHeadingInfoSub">
+              <div className="performaDetailsNumber">
+                <p>
+                  <span>
+                    <sub>IFSC Code</sub>:
+                  </span>
+                  ICIC0004405
+                </p>
+                <p>
+                  <span>
+                    <sub>Account Number</sub>:
+                  </span>
+                  440505000387
+                </p>
+                <p>
+                  <span>
+                    <sub>Account Type</sub>:
+                  </span>
+                  Current Account
+                </p>
+                <p>
+                  <span>
+                    <sub>Branch</sub>:
+                  </span>
+                  Kanakapura Road
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
         <div className="performaPaymentDetails">
           <div className="performaPaymentDetailsLeft">
             <div className="performaPaymentDetailsHeading">

@@ -1,7 +1,6 @@
 import React from "react";
 import KESLogo from "../assets/KESLogo.png";
-import Signature from "../assets/Signature.png";
-import { toWords } from "number-to-words";
+import rupeesInWords from "rupeesinword";
 import { Margin, Resolution, usePDF } from "react-to-pdf";
 
 const formatDate = (dateString) => {
@@ -23,12 +22,14 @@ const PerformaInvoiceKESLayout = ({ data }) => {
 
   const totalCostInWords = () => {
     let total = calculateTotalCost();
+
     if (data.Tax === "SGSTandCGST") {
       total = (total * data.CGST) / 100 + (total * data.SGST) / 100 + total;
     } else {
       total = (total * data.IGST) / 100 + total;
     }
-    return toWords(total);
+
+    return rupeesInWords(Math.round(total));
   };
 
   const { toPDF, targetRef } = usePDF({
@@ -36,6 +37,15 @@ const PerformaInvoiceKESLayout = ({ data }) => {
     filename: "usepdf-example.pdf",
     page: { margin: Margin.NONE, resolution: Resolution.HIGH, size: "A1" },
   });
+
+
+    const formatIndianNumber = (number) => {
+      return new Intl.NumberFormat("en-IN", {
+        style: "decimal",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }).format(number);
+    };
 
   return (
     <div className="containerBig" id="containerBig">
@@ -236,8 +246,10 @@ const PerformaInvoiceKESLayout = ({ data }) => {
                 <div className="partName"> {item.partName}</div>
                 <div className="HSNcode"> {item.HSNCode}</div>
                 <div className="Quantity"> {item.Quantity}</div>
-                <div className="UnitCost">{item.Cost}</div>
-                <div className="TotalCost">{item.Quantity * item.Cost}</div>
+                <div className="UnitCost">{formatIndianNumber(item.Cost)}</div>
+                <div className="TotalCost">
+                  {formatIndianNumber(item.Quantity * item.Cost)}
+                </div>
               </div>
             ))}
           </div>
@@ -256,7 +268,7 @@ const PerformaInvoiceKESLayout = ({ data }) => {
               <p style={{ width: "80px" }}>Sub Total</p>
               <span>:</span>
               <p style={{ width: "100px", textAlign: "end" }}>
-                {calculateTotalCost()}
+                {formatIndianNumber(calculateTotalCost())}
               </p>
             </div>
             {data.Tax === "SGSTandCGST" && (
@@ -265,23 +277,29 @@ const PerformaInvoiceKESLayout = ({ data }) => {
                   <p style={{ width: "80px" }}>CGST {data.CGST}%</p>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {(calculateTotalCost() * data.CGST) / 100}
+                    {formatIndianNumber(
+                      (calculateTotalCost() * data.CGST) / 100
+                    )}
                   </p>
                 </div>
                 <div className="performaAmountSet">
                   <p style={{ width: "80px" }}>SGST {data.SGST}%</p>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {(calculateTotalCost() * data.SGST) / 100}
+                    {formatIndianNumber(
+                      (calculateTotalCost() * data.SGST) / 100
+                    )}
                   </p>
                 </div>
                 <div className="performaAmountSet">
                   <sub style={{ width: "80px" }}>Total Amount </sub>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {(calculateTotalCost() * data.SGST) / 100 +
-                      (calculateTotalCost() * data.CGST) / 100 +
-                      calculateTotalCost()}
+                    {formatIndianNumber(
+                      (calculateTotalCost() * data.SGST) / 100 +
+                        (calculateTotalCost() * data.CGST) / 100 +
+                        calculateTotalCost()
+                    )}
                   </p>
                 </div>
               </>
