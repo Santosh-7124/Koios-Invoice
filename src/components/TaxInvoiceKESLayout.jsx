@@ -1,7 +1,6 @@
 import React from "react";
 import KESLogo from "../assets/KESLogo.png";
-import Signature from "../assets/Signature.png";
-import { toWords } from "number-to-words";
+import rupeesInWords from "rupeesinword";
 import { Margin, Resolution, usePDF } from "react-to-pdf";
 
 const formatDate = (dateString) => {
@@ -13,31 +12,40 @@ const formatDate = (dateString) => {
 };
 
 function TaxInvoiceKESLayout({ data }) {
-  const calculateTotalCost = () => {
-    let total = 0;
-    data.items.forEach((item) => {
-      item.details.forEach((detail) => {
-        total += detail.quantity * detail.cost;
-      });
-    });
-    return total;
-  };
+ const calculateTotalCost = () => {
+   let total = 0;
+   data.items.forEach((item) => {
+     total += item.Quantity * item.Cost;
+   });
+   return total;
+ };
 
-  const totalCostInWords = () => {
-    let total = calculateTotalCost();
-    if (data.Tax === "SGSTandCGST") {
-      total = (total * data.CGST) / 100 + (total * data.SGST) / 100 + total;
-    } else {
-      total = (total * data.IGST) / 100 + total;
-    }
-    return toWords(total);
-  };
+ const totalCostInWords = () => {
+   let total = calculateTotalCost();
 
-  const { toPDF, targetRef } = usePDF({
-    method: "save",
-    filename: "usepdf-example.pdf",
-    page: { margin: Margin.NONE, resolution: Resolution.HIGH, size: "A1" },
-  });
+   if (data.Tax === "SGSTandCGST") {
+     total = (total * data.CGST) / 100 + (total * data.SGST) / 100 + total;
+   } else {
+     total = (total * data.IGST) / 100 + total;
+   }
+
+   return rupeesInWords(Math.round(total));
+ };
+
+ const { toPDF, targetRef } = usePDF({
+   method: "save",
+   filename: "usepdf-example.pdf",
+   page: { margin: Margin.NONE, resolution: Resolution.HIGH, size: "A1" },
+ });
+
+ const formatIndianNumber = (number) => {
+   return new Intl.NumberFormat("en-IN", {
+     style: "decimal",
+     minimumFractionDigits: 0,
+     maximumFractionDigits: 0,
+   }).format(number);
+ };
+
 
   return (
     <div className="containerBig" id="containerBig">
@@ -66,7 +74,7 @@ function TaxInvoiceKESLayout({ data }) {
               </p>
               <p>
                 <span>
-                  <sub>Reference</sub>:
+                  <sub>Reference No.</sub>:
                 </span>
                 {data.referenceNumber}
               </p>
@@ -159,15 +167,17 @@ function TaxInvoiceKESLayout({ data }) {
         <div className="performaTable">
           <div className="performaTableHeading">
             <div className="number">No</div>
-            <div className="partName">Services</div>{" "}
-            <div className="performaTableSetDetails">
-              <div className="performaTableSetDetailsSet">
-                <div className="detail">Details</div>
-                <div className="Quantity">Oty</div>
-                <div className="UnitCost">Unit Cost</div>
-                <div className="TotalCost">Total Cost</div>
-              </div>
+            <div className="partName">Description</div>
+            <div className="HSNcode">HSN Code</div>
+            <div className="Quantity">
+              {data.CostType === "CostByQuantity" ? "Quantity" : "no of hours"}
             </div>
+            <div className="UnitCost">
+              {data.CostType === "CostByQuantity"
+                ? "Unit Cost"
+                : "per hour cost"}
+            </div>
+            <div className="TotalCost">Total Cost</div>
           </div>
           <div
             className="performaTableContainer"
@@ -176,27 +186,12 @@ function TaxInvoiceKESLayout({ data }) {
             {data.items.map((item, index) => (
               <div className="performaTableSet" key={index}>
                 <div className="number">{index + 1}</div>
-                <div className="partName">{item.partName}</div>
-                <div className="performaTableSetDetails">
-                  {item.details.map((detail, detailIndex) => (
-                    <div
-                      className="performaTableSetDetailsSet"
-                      key={detailIndex}
-                    >
-                      <div className="detail">{detail.detail}</div>
-                      <div className="Quantity">
-                        {detail.complimentary ? "-" : detail.quantity}
-                      </div>
-                      <div className="UnitCost">
-                        {detail.complimentary ? "-" : detail.cost}
-                      </div>
-                      <div className="TotalCost">
-                        {detail.complimentary
-                          ? "Complimentary"
-                          : detail.quantity * detail.cost}
-                      </div>
-                    </div>
-                  ))}
+                <div className="partName"> {item.partName}</div>
+                <div className="HSNcode"> {item.HSNCode}</div>
+                <div className="Quantity"> {item.Quantity}</div>
+                <div className="UnitCost">{formatIndianNumber(item.Cost)}</div>
+                <div className="TotalCost">
+                  {formatIndianNumber(item.Quantity * item.Cost)}
                 </div>
               </div>
             ))}
@@ -211,12 +206,12 @@ function TaxInvoiceKESLayout({ data }) {
               {totalCostInWords()} Rupees Only
             </p>
           </div>
-          <div className="performaAmount">
+          <div className="performaAmount" style={{ paddingRight: "20px" }}>
             <div className="performaAmountSet">
               <p style={{ width: "80px" }}>Sub Total</p>
               <span>:</span>
               <p style={{ width: "100px", textAlign: "end" }}>
-                {"₹"} {calculateTotalCost()}
+                {formatIndianNumber(calculateTotalCost())}
               </p>
             </div>
             {data.Tax === "SGSTandCGST" && (
@@ -225,24 +220,29 @@ function TaxInvoiceKESLayout({ data }) {
                   <p style={{ width: "80px" }}>CGST {data.CGST}%</p>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {"₹"} {(calculateTotalCost() * data.CGST) / 100}
+                    {formatIndianNumber(
+                      (calculateTotalCost() * data.CGST) / 100
+                    )}
                   </p>
                 </div>
                 <div className="performaAmountSet">
                   <p style={{ width: "80px" }}>SGST {data.SGST}%</p>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {"₹"} {(calculateTotalCost() * data.SGST) / 100}
+                    {formatIndianNumber(
+                      (calculateTotalCost() * data.SGST) / 100
+                    )}
                   </p>
                 </div>
                 <div className="performaAmountSet">
                   <sub style={{ width: "80px" }}>Total Amount </sub>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {"₹"}{" "}
-                    {(calculateTotalCost() * data.SGST) / 100 +
-                      (calculateTotalCost() * data.CGST) / 100 +
-                      calculateTotalCost()}
+                    {formatIndianNumber(
+                      (calculateTotalCost() * data.SGST) / 100 +
+                        (calculateTotalCost() * data.CGST) / 100 +
+                        calculateTotalCost()
+                    )}
                   </p>
                 </div>
               </>
@@ -253,14 +253,14 @@ function TaxInvoiceKESLayout({ data }) {
                   <p style={{ width: "80px" }}>IGST {data.IGST}%</p>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {"₹"} {(calculateTotalCost() * data.IGST) / 100}
+                    {" "}
+                    {(calculateTotalCost() * data.IGST) / 100}
                   </p>
                 </div>
                 <div className="performaAmountSet">
                   <sub style={{ width: "80px" }}>Total Amount </sub>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {"₹"}{" "}
                     {(calculateTotalCost() * data.IGST) / 100 +
                       calculateTotalCost()}
                   </p>
@@ -269,46 +269,49 @@ function TaxInvoiceKESLayout({ data }) {
             )}
           </div>
         </div>
-        <div className="performaBankDetails">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <sub>Koios Engineering Solutions PVT Ltd</sub>
-            <sub>ICICI Bank</sub>
-          </div>
-          <div className="performaHeadingInfoSub">
-            <div className="performaDetailsNumber">
-              <p>
-                <span>
-                  <sub>IFSC Code</sub>:
-                </span>
-                ICIC0004405
-              </p>
-              <p>
-                <span>
-                  <sub>Account Number</sub>:
-                </span>
-                440505000387
-              </p>
-              <p>
-                <span>
-                  <sub>Account Type</sub>:
-                </span>
-                Current Account
-              </p>
-              <p>
-                <span>
-                  <sub>Branch</sub>:
-                </span>
-                Kanakapura Road
-              </p>
+
+        {data.showBankDetail && (
+          <div className="performaBankDetails">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <sub>Koios Engineering Solutions PVT Ltd</sub>
+              <sub>ICICI Bank</sub>
+            </div>
+            <div className="performaHeadingInfoSub">
+              <div className="performaDetailsNumber">
+                <p>
+                  <span>
+                    <sub>IFSC Code</sub>:
+                  </span>
+                  ICIC0004405
+                </p>
+                <p>
+                  <span>
+                    <sub>Account Number</sub>:
+                  </span>
+                  440505000387
+                </p>
+                <p>
+                  <span>
+                    <sub>Account Type</sub>:
+                  </span>
+                  Current Account
+                </p>
+                <p>
+                  <span>
+                    <sub>Branch</sub>:
+                  </span>
+                  Kanakapura Road
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         <div className="performaPaymentDetails">
           <div className="performaPaymentDetailsLeft">
             <div className="performaPaymentDetailsHeading">

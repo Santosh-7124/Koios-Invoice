@@ -5,6 +5,18 @@ import { Link } from "react-router-dom";
 import QuotationInvoiceKESLayout from "./QuotationInvoiceKESLayout";
 
 function QuotationInvoiceKES() {
+  const [placeOfSupply, setPlaceOfSupply] = useState("Bengaluru");
+  const [shippedPhoneNumberValue, shippedPhoneNumberSetValue] = useState();
+  const [billedPhoneNumberValue, billedPhoneNumberSetValue] = useState();
+  const [items, setItems] = useState([
+    { partName: "", HSNCode: "", Quantity: "", Cost: "" },
+  ]);
+  const [selectedTax, setSelectedTax] = useState("SGSTandCGST");
+  const [selectedCostType, setSelectedCostType] = useState("CostByQuantity");
+  const [selectedShippingOption, setSelectedShippingOption] = useState(null);
+  const [formData, setFormData] = useState(null);
+  const [terms, setTerms] = useState([{ terms: "" }]);
+
   const getTodayDate = () => {
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -13,37 +25,25 @@ function QuotationInvoiceKES() {
     return `${yyyy}-${mm}-${dd}`;
   };
 
-  const [placeOfSupply, setPlaceOfSupply] = useState("Bengaluru");
-
   const handleChange = (event) => {
     setPlaceOfSupply(event.target.value);
   };
-
-  const [shippedPhoneNumberValue, shippedPhoneNumberSetValue] = useState();
-  const [billedPhoneNumberValue, billedPhoneNumberSetValue] = useState();
-  const [items, setItems] = useState([
-    {
-      partName: "",
-      HSNCode: "",
-      Quantity: "0",
-      Cost: "0",
-      complimentary: false,
-    },
-  ]);
-
-  const [selectedTax, setSelectedTax] = useState("SGSTandCGST");
 
   const handleTaxChange = (event) => {
     setSelectedTax(event.target.value);
   };
 
-  const [selectedCostType, setSelectedCostType] = useState("CostByQuantity");
-
   const handleCostTypeChange = (event) => {
     setSelectedCostType(event.target.value);
   };
 
-  const [formData, setFormData] = useState(null);
+  const handleRadioClick = (value) => {
+    if (selectedShippingOption === value) {
+      setSelectedShippingOption(null);
+    } else {
+      setSelectedShippingOption(value);
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -67,31 +67,30 @@ function QuotationInvoiceKES() {
       IGST = event.target.elements.IGST.value || "";
     }
 
-    let formData = {
-      Subject: event.target.elements.Subject.value,
-      EstimateDate: event.target.elements.EstimateDate.value,
-      ExpiryDate: event.target.elements.ExpiryDate.value,
-      leadTime: event.target.elements.leadTime.value,
-      referenceNumber: event.target.elements.referenceNumber.value,
-      billedToCompany: event.target.elements.billedToCompany.value,
-      billedToGSTIN: event.target.elements.billedToGSTIN.value,
-      billedToPAN: event.target.elements.billedToPAN.value,
-      billedToAddress: event.target.elements.billedToAddress.value,
-      billedToPhoneNumber: billedPhoneNumberValue,
-      CostType: selectedCostType,
-      items: items,
-      Tax: selectedTax,
-      SGST: SGST,
-      CGST: CGST,
-      IGST: IGST,
-      PaymentTermsandConditions: terms,
-    };
+   let formData = {
+     Subject: event.target.elements.Subject.value,
+     EstimateDate: event.target.elements.EstimateDate.value,
+     ExpiryDate: event.target.elements.ExpiryDate.value,
+     leadTime: event.target.elements.leadTime.value,
+     referenceNumber: event.target.elements.referenceNumber.value,
+     billedToCompany: event.target.elements.billedToCompany.value,
+     billedToGSTIN: event.target.elements.billedToGSTIN.value,
+     billedToPAN: event.target.elements.billedToPAN.value,
+     billedToAddress: event.target.elements.billedToAddress.value,
+     billedToPhoneNumber: billedPhoneNumberValue,
+     CostType: selectedCostType,
+     items: items,
+     Tax: selectedTax,
+     SGST: SGST,
+     CGST: CGST,
+     IGST: IGST,
+     showBankDetail: event.target.elements.showBankDetail.checked,
+     PaymentTermsandConditions: terms,
+   };
 
     setFormData(formData);
     console.log("Form Data:", formData);
   };
-
-  const [terms, setTerms] = useState([{ terms: "" }]);
 
   const handleTermsChange = (index, event) => {
     const newTerms = [...terms];
@@ -108,16 +107,7 @@ function QuotationInvoiceKES() {
   };
 
   const handleAddItem = () => {
-    setItems([
-      ...items,
-      {
-        partName: "",
-        HSNCode: "",
-        Quantity: "0",
-        Cost: "0",
-        complimentary: false,
-      },
-    ]);
+    setItems([...items, { partName: "", HSNCode: "", Quantity: "", Cost: "" }]);
   };
 
   const handleRemoveItem = (index) => {
@@ -127,20 +117,13 @@ function QuotationInvoiceKES() {
   };
 
   const handleItemChange = (index, event) => {
-    const { name, value, type, checked } = event.target;
+    const { name, value } = event.target;
     const updatedItems = [...items];
-
-    if (type === "checkbox" && name === "complimentary") {
-      updatedItems[index][name] = checked;
-      if (checked) {
-        updatedItems[index].Quantity = "0";
-        updatedItems[index].Cost = "0";
-      }
-    } else {
-      updatedItems[index][name] = value;
-    }
+    updatedItems[index][name] = value;
     setItems(updatedItems);
   };
+
+
   return (
     <div>
       <div className="heading">
@@ -305,7 +288,7 @@ function QuotationInvoiceKES() {
                 >
                   <div className="formInputDiv">
                     <label htmlFor={`partName${index}`}>
-                      Description<span>*</span>
+                      Part Name<span>*</span>
                     </label>
                     <input
                       required
@@ -337,11 +320,18 @@ function QuotationInvoiceKES() {
                 </div>
                 <div className="formSubSection">
                   <div className="formInputDiv">
+                    <label htmlFor={`HSNCode${index}`}>HSN Code</label>
+                    <input
+                      type="text"
+                      id={`HSNCode${index}`}
+                      name="HSNCode"
+                      value={item.HSNCode}
+                      onChange={(e) => handleItemChange(index, e)}
+                    />
+                  </div>
+                  <div className="formInputDiv">
                     <label htmlFor={`Quantity${index}`}>
-                      {selectedCostType === "CostByQuantity"
-                        ? "Quantity"
-                        : "No. of hours"}
-                      <span>*</span>
+                      Quantity<span>*</span>
                     </label>
                     <input
                       required
@@ -354,10 +344,7 @@ function QuotationInvoiceKES() {
                   </div>
                   <div className="formInputDiv">
                     <label htmlFor={`Cost${index}`}>
-                      {selectedCostType === "CostByQuantity"
-                        ? "Unit Cost"
-                        : "Cost / hour"}
-                      <span>*</span>
+                      Cost<span>*</span>
                     </label>
                     <input
                       required
@@ -368,16 +355,6 @@ function QuotationInvoiceKES() {
                       onChange={(e) => handleItemChange(index, e)}
                     />
                   </div>
-                </div>
-                <div className="formCheckBox Complimentary">
-                  <p>Complimentary</p>
-                  <input
-                    type="checkbox"
-                    id={`complimentary${index}`}
-                    name="complimentary"
-                    checked={item.complimentary}
-                    onChange={(e) => handleItemChange(index, e)}
-                  />
                 </div>
               </div>
             ))}
@@ -461,6 +438,19 @@ function QuotationInvoiceKES() {
             )}
           </div>
           <div className="formSection">
+            <div className="formSectionHeading">Bank Details</div>
+            <div className="formCheckBox">
+              <label htmlFor="showBankDetail">Show Bank Detals</label>
+              <input
+                type="checkbox"
+                id="showBankDetail"
+                name="showBankDetail"
+                value="showBankDetail"
+              />
+            </div>
+          </div>
+          <div className="formSection">
+            <div className="formSectionHeading">Payment Terms & Conditions</div>
             {terms.map((termscondition, termsconditionIndex) => (
               <div
                 className="formSubSection"

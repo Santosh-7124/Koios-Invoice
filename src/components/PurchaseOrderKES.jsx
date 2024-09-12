@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import PurchaseOrderKESLayout from "./PurchaseOrderKESLayout";
 
 function PurchaseOrderKES() {
-  // State declarations
   const [placeOfSupply, setPlaceOfSupply] = useState("Bengaluru");
   const [shippedPhoneNumberValue, shippedPhoneNumberSetValue] = useState();
   const [billedPhoneNumberValue, billedPhoneNumberSetValue] = useState();
@@ -402,7 +401,7 @@ function PurchaseOrderKES() {
                 >
                   <div className="formInputDiv">
                     <label htmlFor={`partName${index}`}>
-                      Part Name<span>*</span>
+                      Description<span>*</span>
                     </label>
                     <input
                       required
