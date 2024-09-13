@@ -259,7 +259,7 @@ function TaxInvoiceKES() {
                 >
                   <div className="formInputDiv">
                     <label htmlFor={`partName${index}`}>
-                      Part Name<span>*</span>
+                      Description<span>*</span>
                     </label>
                     <input
                       required
