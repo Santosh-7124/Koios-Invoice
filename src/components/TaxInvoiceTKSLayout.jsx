@@ -270,46 +270,48 @@ function TaxInvoiceTKSLayout({ data }) {
             )}
           </div>
         </div>
-        <div className="performaBankDetails">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <sub>Koios Engineering Solutions PVT Ltd</sub>
-            <sub>ICICI Bank</sub>
-          </div>
-          <div className="performaHeadingInfoSub">
-            <div className="performaDetailsNumber">
-              <p>
-                <span>
-                  <sub>IFSC Code</sub>:
-                </span>
-                ICIC0004405
-              </p>
-              <p>
-                <span>
-                  <sub>Account Number</sub>:
-                </span>
-                440505000387
-              </p>
-              <p>
-                <span>
-                  <sub>Account Type</sub>:
-                </span>
-                Current Account
-              </p>
-              <p>
-                <span>
-                  <sub>Branch</sub>:
-                </span>
-                Kanakapura Road
-              </p>
+        {data.showBankDetail && (
+          <div className="performaBankDetails">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <sub>Koios Engineering Solutions PVT Ltd</sub>
+              <sub>ICICI Bank</sub>
+            </div>
+            <div className="performaHeadingInfoSub">
+              <div className="performaDetailsNumber">
+                <p>
+                  <span>
+                    <sub>IFSC Code</sub>:
+                  </span>
+                  ICIC0004405
+                </p>
+                <p>
+                  <span>
+                    <sub>Account Number</sub>:
+                  </span>
+                  440505000387
+                </p>
+                <p>
+                  <span>
+                    <sub>Account Type</sub>:
+                  </span>
+                  Current Account
+                </p>
+                <p>
+                  <span>
+                    <sub>Branch</sub>:
+                  </span>
+                  Kanakapura Road
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         <div className="performaPaymentDetails">
           <div className="performaPaymentDetailsLeft">
             <div className="performaPaymentDetailsHeading">

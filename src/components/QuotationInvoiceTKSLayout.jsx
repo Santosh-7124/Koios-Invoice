@@ -16,13 +16,34 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
   const calculateTotalCost = () => {
     let total = 0;
     data.items.forEach((item) => {
-      total += 1 * item.Cost;
+      item.details.forEach((detail) => {
+        total += detail.quantity * detail.cost;
+      });
     });
     return total;
   };
 
   const totalCostInWords = () => {
     let total = calculateTotalCost();
+    if (data.Tax === "SGSTandCGST") {
+      total = (total * data.CGST) / 100 + (total * data.SGST) / 100 + total;
+    } else {
+      total = (total * data.IGST) / 100 + total;
+    }
+    return toWords(total);
+  };
+
+
+  const calculateTotalCostNew = () => {
+     let total = 0;
+     data.itemsNew.forEach((itemNew) => {
+       total += 1 * itemNew.Cost;
+     });
+     return total;
+  };
+
+  const totalCostInWordsNew = () => {
+    let total = calculateTotalCostNew();
     if (data.Tax === "SGSTandCGST") {
       total = (total * data.CGST) / 100 + (total * data.SGST) / 100 + total;
     } else {
@@ -179,147 +200,280 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
             </div>
           )}
         </div>
-        <div className="performaTable">
-          <div className="performaTableHeading">
-            <div className="number">No</div>
-            <div className="partName" style={{ width: "30%" }}>
-              Part Name
-            </div>
-            <div className="HSNcode" style={{ width: "30%" }}>
-              Duration
-            </div>
-            <div className="UnitCost" style={{ width: "30%" }}>
-              Cost
-            </div>
-          </div>
-          <div
-            className="performaTableContainer"
-            style={{ background: "rgba(255, 191, 0, 0.10)" }}
-          >
-            {data.items.map((item, index) => (
-              <div className="performaTableSet" key={index}>
-                <div className="number">{index + 1}</div>
-                <div className="partName" style={{ width: "30%" }}>
-                  {" "}
-                  {item.partName}
-                </div>
-                <div className="HSNcode" style={{ width: "30%" }}>
-                  {" "}
-                  {item.HSNCode}
-                </div>
-                <div className="UnitCost" style={{ width: "30%" }}>
-                  {item.complimentary ? "Complimentary" : item.Cost}
+
+        {data.includeQuantity === "includeQuantity" && (
+          <>
+            <div className="performaTable">
+              <div className="performaTableHeading">
+                <div className="number">No</div>
+                <div className="partName">Services</div>{" "}
+                <div className="performaTableSetDetails">
+                  <div className="performaTableSetDetailsSet">
+                    <div className="detail">Details</div>
+                    <div className="Quantity">
+                      {data.CostType === "CostByQuantity"
+                        ? "Quantity"
+                        : "no of hours"}
+                    </div>
+                    <div className="UnitCost">
+                      {data.CostType === "CostByQuantity"
+                        ? "Unit Cost"
+                        : "per hour cost"}
+                    </div>
+                    <div className="TotalCost">Total Cost</div>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-        <div className="performaCost">
-          <div className="performaCostWords">
-            <p>
-              <span>Total In Words</span> <span>:</span>
-            </p>
-            <p style={{ paddingTop: "8px" }}>
-              {totalCostInWords()} Rupees Only
-            </p>
-          </div>
-          <div className="performaAmount" style={{ paddingRight: "60px" }}>
-            <div className="performaAmountSet">
-              <p style={{ width: "80px" }}>Sub Total</p>
-              <span>:</span>
-              <p style={{ width: "100px", textAlign: "end" }}>
-                {calculateTotalCost()}
-              </p>
+              <div
+                className="performaTableContainer"
+                style={{ background: "rgba(255, 191, 0, 0.10)" }}
+              >
+                {data.items.map((item, index) => (
+                  <div className="performaTableSet" key={index}>
+                    <div className="number">{index + 1}</div>
+                    <div className="partName">{item.partName}</div>
+                    <div className="performaTableSetDetails">
+                      {item.details.map((detail, detailIndex) => (
+                        <div
+                          className="performaTableSetDetailsSet"
+                          key={detailIndex}
+                        >
+                          <div className="detail">{detail.detail}</div>
+                          <div className="Quantity">
+                            {detail.complimentary ? "-" : detail.quantity}
+                          </div>
+                          <div className="UnitCost">
+                            {detail.complimentary ? "-" : detail.cost}
+                          </div>
+                          <div className="TotalCost">
+                            {detail.complimentary
+                              ? "Complimentary"
+                              : detail.quantity * detail.cost}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            {data.Tax === "SGSTandCGST" && (
-              <>
+            <div className="performaCost">
+              <div className="performaCostWords">
+                <p>
+                  <span>Total In Words</span> <span>:</span>
+                </p>
+                <p style={{ paddingTop: "8px" }}>
+                  {totalCostInWords()} Rupees Only
+                </p>
+              </div>
+              <div className="performaAmount" style={{ paddingRight: "60px" }}>
                 <div className="performaAmountSet">
-                  <p style={{ width: "80px" }}>CGST {data.CGST}%</p>
+                  <p style={{ width: "80px" }}>Sub Total</p>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {(calculateTotalCost() * data.CGST) / 100}
+                    {calculateTotalCost()}
                   </p>
                 </div>
+                {data.Tax === "SGSTandCGST" && (
+                  <>
+                    <div className="performaAmountSet">
+                      <p style={{ width: "80px" }}>CGST {data.CGST}%</p>
+                      <span>:</span>
+                      <p style={{ width: "100px", textAlign: "end" }}>
+                        {(calculateTotalCost() * data.CGST) / 100}
+                      </p>
+                    </div>
+                    <div className="performaAmountSet">
+                      <p style={{ width: "80px" }}>SGST {data.SGST}%</p>
+                      <span>:</span>
+                      <p style={{ width: "100px", textAlign: "end" }}>
+                        {(calculateTotalCost() * data.SGST) / 100}
+                      </p>
+                    </div>
+                    <div className="performaAmountSet">
+                      <sub style={{ width: "80px" }}>Total Amount </sub>
+                      <span>:</span>
+                      <p style={{ width: "100px", textAlign: "end" }}>
+                        {(calculateTotalCost() * data.SGST) / 100 +
+                          (calculateTotalCost() * data.CGST) / 100 +
+                          calculateTotalCost()}
+                      </p>
+                    </div>
+                  </>
+                )}
+                {data.Tax === "IGST" && (
+                  <>
+                    <div className="performaAmountSet">
+                      <p style={{ width: "80px" }}>IGST {data.IGST}%</p>
+                      <span>:</span>
+                      <p style={{ width: "100px", textAlign: "end" }}>
+                        {" "}
+                        {(calculateTotalCost() * data.IGST) / 100}
+                      </p>
+                    </div>
+                    <div className="performaAmountSet">
+                      <sub style={{ width: "80px" }}>Total Amount </sub>
+                      <span>:</span>
+                      <p style={{ width: "100px", textAlign: "end" }}>
+                        {(calculateTotalCost() * data.IGST) / 100 +
+                          calculateTotalCost()}
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          </>
+        )}
+
+        {data.includeQuantity === "notIncludeQuantity" && (
+          <>
+            <div className="performaTable">
+              <div className="performaTableHeading">
+                <div className="number">No</div>
+                <div className="partName" style={{ width: "30%" }}>
+                  Part Name
+                </div>
+                <div className="HSNcode" style={{ width: "30%" }}>
+                  Duration
+                </div>
+                <div className="UnitCost" style={{ width: "30%" }}>
+                  Cost
+                </div>
+              </div>
+              <div
+                className="performaTableContainer"
+                style={{ background: "rgba(255, 191, 0, 0.10)" }}
+              >
+                {data.itemsNew.map((itemNew, index) => (
+                  <div className="performaTableSet" key={index}>
+                    <div className="number">{index + 1}</div>
+                    <div className="partName" style={{ width: "30%" }}>
+                      {" "}
+                      {itemNew.partName}
+                    </div>
+                    <div className="HSNcode" style={{ width: "30%" }}>
+                      {" "}
+                      {itemNew.Duration}
+                    </div>
+                    <div className="UnitCost" style={{ width: "30%" }}>
+                      {itemNew.complimentary ? "Complimentary" : itemNew.Cost}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="performaCost">
+              <div className="performaCostWords">
+                <p>
+                  <span>Total In Words</span> <span>:</span>
+                </p>
+                <p style={{ paddingTop: "8px" }}>
+                  {totalCostInWordsNew()} Rupees Only
+                </p>
+              </div>
+              <div className="performaAmount" style={{ paddingRight: "60px" }}>
                 <div className="performaAmountSet">
-                  <p style={{ width: "80px" }}>SGST {data.SGST}%</p>
+                  <p style={{ width: "80px" }}>Sub Total</p>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {(calculateTotalCost() * data.SGST) / 100}
+                    {calculateTotalCostNew()}
                   </p>
                 </div>
-                <div className="performaAmountSet">
-                  <sub style={{ width: "80px" }}>Total Amount </sub>
-                  <span>:</span>
-                  <p style={{ width: "100px", textAlign: "end" }}>
-                    {(calculateTotalCost() * data.SGST) / 100 +
-                      (calculateTotalCost() * data.CGST) / 100 +
-                      calculateTotalCost()}
-                  </p>
-                </div>
-              </>
-            )}
-            {data.Tax === "IGST" && (
-              <>
-                <div className="performaAmountSet">
-                  <p style={{ width: "80px" }}>IGST {data.IGST}%</p>
-                  <span>:</span>
-                  <p style={{ width: "100px", textAlign: "end" }}>
-                    {" "}
-                    {(calculateTotalCost() * data.IGST) / 100}
-                  </p>
-                </div>
-                <div className="performaAmountSet">
-                  <sub style={{ width: "80px" }}>Total Amount </sub>
-                  <span>:</span>
-                  <p style={{ width: "100px", textAlign: "end" }}>
-                    {(calculateTotalCost() * data.IGST) / 100 +
-                      calculateTotalCost()}
-                  </p>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-        <div className="performaBankDetails">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <sub>Koios Software Solutions PVT Ltd</sub>
-            <sub>ICICI Bank</sub>
-          </div>
-          <div className="performaHeadingInfoSub">
-            <div className="performaDetailsNumber">
-              <p>
-                <span>
-                  <sub>IFSC Code</sub>:
-                </span>
-                ICIC0004405
-              </p>
-              <p>
-                <span>
-                  <sub>Account Number</sub>:
-                </span>
-                440505000387
-              </p>
-              <p>
-                <span>
-                  <sub>Account Type</sub>:
-                </span>
-                Current Account
-              </p>
-              <p>
-                <span>
-                  <sub>Branch</sub>:
-                </span>
-                Kanakapura Road
-              </p>
+                {data.Tax === "SGSTandCGST" && (
+                  <>
+                    <div className="performaAmountSet">
+                      <p style={{ width: "80px" }}>CGST {data.CGST}%</p>
+                      <span>:</span>
+                      <p style={{ width: "100px", textAlign: "end" }}>
+                        {(calculateTotalCostNew() * data.CGST) / 100}
+                      </p>
+                    </div>
+                    <div className="performaAmountSet">
+                      <p style={{ width: "80px" }}>SGST {data.SGST}%</p>
+                      <span>:</span>
+                      <p style={{ width: "100px", textAlign: "end" }}>
+                        {(calculateTotalCostNew() * data.SGST) / 100}
+                      </p>
+                    </div>
+                    <div className="performaAmountSet">
+                      <sub style={{ width: "80px" }}>Total Amount </sub>
+                      <span>:</span>
+                      <p style={{ width: "100px", textAlign: "end" }}>
+                        {(calculateTotalCostNew() * data.SGST) / 100 +
+                          (calculateTotalCostNew() * data.CGST) / 100 +
+                          calculateTotalCostNew()}
+                      </p>
+                    </div>
+                  </>
+                )}
+                {data.Tax === "IGST" && (
+                  <>
+                    <div className="performaAmountSet">
+                      <p style={{ width: "80px" }}>IGST {data.IGST}%</p>
+                      <span>:</span>
+                      <p style={{ width: "100px", textAlign: "end" }}>
+                        {" "}
+                        {(calculateTotalCostNew() * data.IGST) / 100}
+                      </p>
+                    </div>
+                    <div className="performaAmountSet">
+                      <sub style={{ width: "80px" }}>Total Amount </sub>
+                      <span>:</span>
+                      <p style={{ width: "100px", textAlign: "end" }}>
+                        {(calculateTotalCostNew() * data.IGST) / 100 +
+                          calculateTotalCostNew()}
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          </>
+        )}
+
+        {data.showBankDetail && (
+          <div className="performaBankDetails">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <sub>Koios Engineering Solutions PVT Ltd</sub>
+              <sub>ICICI Bank</sub>
+            </div>
+            <div className="performaHeadingInfoSub">
+              <div className="performaDetailsNumber">
+                <p>
+                  <span>
+                    <sub>IFSC Code</sub>:
+                  </span>
+                  ICIC0004405
+                </p>
+                <p>
+                  <span>
+                    <sub>Account Number</sub>:
+                  </span>
+                  440505000387
+                </p>
+                <p>
+                  <span>
+                    <sub>Account Type</sub>:
+                  </span>
+                  Current Account
+                </p>
+                <p>
+                  <span>
+                    <sub>Branch</sub>:
+                  </span>
+                  Kanakapura Road
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         <div className="performaPaymentDetails">
           <div className="performaPaymentDetailsLeft">
             <div className="performaPaymentDetailsHeading">

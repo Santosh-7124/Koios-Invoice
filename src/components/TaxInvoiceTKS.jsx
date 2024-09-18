@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+   import React, { useState } from "react";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { Link } from "react-router-dom";
@@ -64,6 +64,7 @@ function TaxInvoiceTKS() {
       SGST: SGST,
       CGST: CGST,
       IGST: IGST,
+      showBankDetail: event.target.elements.showBankDetail.checked,
       PaymentTermsandConditions: terms,
     };
 
@@ -73,19 +74,16 @@ function TaxInvoiceTKS() {
 
   const [terms, setTerms] = useState([{ terms: "" }]);
 
-  // Function to handle change in terms input field
   const handleTermsChange = (index, event) => {
     const newTerms = [...terms];
     newTerms[index].terms = event.target.value;
     setTerms(newTerms);
   };
 
-  // Function to handle adding new terms
   const handleAddTerms = () => {
     setTerms([...terms, { terms: "" }]);
   };
 
-  // Function to handle removing terms
   const handleRemoveTerms = (index) => {
     setTerms(terms.filter((_, i) => i !== index));
   };
@@ -489,6 +487,18 @@ function TaxInvoiceTKS() {
                 </div>
               </div>
             )}
+          </div>
+          <div className="formSection">
+            <div className="formSectionHeading">Bank Details</div>
+            <div className="formCheckBox">
+              <label htmlFor="showBankDetail">Show Bank Detals</label>
+              <input
+                type="checkbox"
+                id="showBankDetail"
+                name="showBankDetail"
+                value="showBankDetail"
+              />
+            </div>
           </div>
           <div className="formSection">
             {terms.map((termscondition, termsconditionIndex) => (
