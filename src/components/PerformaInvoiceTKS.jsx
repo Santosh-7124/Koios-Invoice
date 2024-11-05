@@ -54,7 +54,7 @@ function PerformaInvoiceTKS() {
       shippedToGSTIN = "22AAAAA1234A1Z7";
       shippedToPAN = "QHYUN1234T";
       shippedToAddress =
-        "No. 57/D, Balaji Layout, Vajarahalli, Near 100ft road, off Knakapura main road Thalaghattapura, Bangalore South, Bangalore - 560109.";
+        "No.315/64, Mallasandra village , off holiday village road, Thalaghattapura, Bangalore, Bangalore South, Karnataka, India, 560109";
       shippedToPhoneNumber = "+911234567890";
     }
 

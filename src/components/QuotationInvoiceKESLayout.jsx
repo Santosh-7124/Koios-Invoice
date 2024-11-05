@@ -12,40 +12,39 @@ const formatDate = (dateString) => {
 };
 
 const QuotationInvoiceKESLayout = ({ data }) => {
- const calculateTotalCost = () => {
-   let total = 0;
-   data.items.forEach((item) => {
-     total += item.Quantity * item.Cost;
-   });
-   return total;
- };
+  const calculateTotalCost = () => {
+    let total = 0;
+    data.items.forEach((item) => {
+      total += item.Quantity * item.Cost;
+    });
+    return total;
+  };
 
- const totalCostInWords = () => {
-   let total = calculateTotalCost();
+  const totalCostInWords = () => {
+    let total = calculateTotalCost();
 
-   if (data.Tax === "SGSTandCGST") {
-     total = (total * data.CGST) / 100 + (total * data.SGST) / 100 + total;
-   } else {
-     total = (total * data.IGST) / 100 + total;
-   }
+    if (data.Tax === "SGSTandCGST") {
+      total = (total * data.CGST) / 100 + (total * data.SGST) / 100 + total;
+    } else {
+      total = (total * data.IGST) / 100 + total;
+    }
 
-   return rupeesInWords(Math.round(total));
- };
+    return rupeesInWords(Math.round(total));
+  };
 
- const { toPDF, targetRef } = usePDF({
-   method: "save",
-   filename: "usepdf-example.pdf",
-   page: { margin: Margin.NONE, resolution: Resolution.HIGH, size: "A1" },
- });
+  const { toPDF, targetRef } = usePDF({
+    method: "save",
+    filename: "usepdf-example.pdf",
+    page: { margin: Margin.NONE, resolution: Resolution.HIGH, size: "A1" },
+  });
 
- const formatIndianNumber = (number) => {
-   return new Intl.NumberFormat("en-IN", {
-     style: "decimal",
-     minimumFractionDigits: 0,
-     maximumFractionDigits: 0,
-   }).format(number);
- };
-
+  const formatIndianNumber = (number) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "decimal",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(number);
+  };
 
   return (
     <div className="containerBig" id="containerBig">
@@ -98,9 +97,9 @@ const QuotationInvoiceKESLayout = ({ data }) => {
               </sub>
               <div className="performaHeadingInfoSub">
                 <p>
-                  No. 57/D, Balaji Layout, Vajarahalli, Near 100ft road, off
-                  Kankapura main road Thalaghattapura,Bangalore South,
-                  <br /> Bangalore - 560109.
+                  No.315/64, Mallasandra village , off holiday village road,
+                  Thalaghattapura, Bangalore, Bangalore South, Karnataka, India,
+                  560109
                 </p>
                 <div className="performaDetailsNumber">
                   <p>

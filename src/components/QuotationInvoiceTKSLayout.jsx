@@ -33,13 +33,12 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
     return toWords(total);
   };
 
-
   const calculateTotalCostNew = () => {
-     let total = 0;
-     data.itemsNew.forEach((itemNew) => {
-       total += 1 * itemNew.Cost;
-     });
-     return total;
+    let total = 0;
+    data.itemsNew.forEach((itemNew) => {
+      total += 1 * itemNew.Cost;
+    });
+    return total;
   };
 
   const totalCostInWordsNew = () => {
@@ -110,9 +109,9 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
               </sub>
               <div className="performaHeadingInfoSub">
                 <p>
-                  No. 57/D, Balaji Layout, Vajarahalli, Near 100ft road, off
-                  Kankapura main road Thalaghattapura,Bangalore South,
-                  <br /> Bangalore - 560109.
+                  No.315/64, Mallasandra village , off holiday village road,
+                  Thalaghattapura, Bangalore, Bangalore South, Karnataka, India,
+                  560109
                 </p>
                 <div className="performaDetailsNumber">
                   <p>

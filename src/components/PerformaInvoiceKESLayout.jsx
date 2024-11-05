@@ -38,14 +38,13 @@ const PerformaInvoiceKESLayout = ({ data }) => {
     page: { margin: Margin.NONE, resolution: Resolution.HIGH, size: "A1" },
   });
 
-
-    const formatIndianNumber = (number) => {
-      return new Intl.NumberFormat("en-IN", {
-        style: "decimal",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-      }).format(number);
-    };
+  const formatIndianNumber = (number) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "decimal",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(number);
+  };
 
   return (
     <div className="containerBig" id="containerBig">
@@ -104,9 +103,9 @@ const PerformaInvoiceKESLayout = ({ data }) => {
               </sub>
               <div className="performaHeadingInfoSub">
                 <p>
-                  No. 57/D, Balaji Layout, Vajarahalli, Near 100ft road, off
-                  Kankapura main road Thalaghattapura,Bangalore South,
-                  <br /> Bangalore - 560109.
+                  No.315/64, Mallasandra village , off holiday village road,
+                  Thalaghattapura, Bangalore, Bangalore South, Karnataka, India,
+                  560109
                 </p>
                 <div className="performaDetailsNumber">
                   <p>

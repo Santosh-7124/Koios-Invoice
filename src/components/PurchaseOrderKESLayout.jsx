@@ -3,7 +3,6 @@ import KESLogo from "../assets/KESLogo.png";
 import rupeesInWords from "rupeesinword";
 import { Margin, Resolution, usePDF } from "react-to-pdf";
 
-
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, "0");
@@ -21,20 +20,17 @@ const PurchaseOrderKESLayout = ({ data }) => {
     return total;
   };
 
+  const totalCostInWords = () => {
+    let total = calculateTotalCost();
 
+    if (data.Tax === "SGSTandCGST") {
+      total = (total * data.CGST) / 100 + (total * data.SGST) / 100 + total;
+    } else {
+      total = (total * data.IGST) / 100 + total;
+    }
 
-const totalCostInWords = () => {
-  let total = calculateTotalCost();
-
-  if (data.Tax === "SGSTandCGST") {
-    total = (total * data.CGST) / 100 + (total * data.SGST) / 100 + total;
-  } else {
-    total = (total * data.IGST) / 100 + total;
-  }
-
-  return rupeesInWords(Math.round(total));
-};
-
+    return rupeesInWords(Math.round(total));
+  };
 
   const { toPDF, targetRef } = usePDF({
     method: "save",
@@ -42,12 +38,11 @@ const totalCostInWords = () => {
     page: { margin: Margin.NONE, resolution: Resolution.HIGH, size: "A1" },
   });
 
-
   const formatIndianNumber = (number) => {
     return new Intl.NumberFormat("en-IN", {
       style: "decimal",
       minimumFractionDigits: 0,
-      maximumFractionDigits: 0, 
+      maximumFractionDigits: 0,
     }).format(number);
   };
 
@@ -108,9 +103,9 @@ const totalCostInWords = () => {
               </sub>
               <div className="performaHeadingInfoSub">
                 <p>
-                  No. 57/D, Balaji Layout, Vajarahalli, Near 100ft road, off
-                  Kankapura main road Thalaghattapura,Bangalore South,
-                  <br /> Bangalore - 560109.
+                  No.315/64, Mallasandra village , off holiday village road,
+                  Thalaghattapura, Bangalore, Bangalore South, Karnataka, India,
+                  560109
                 </p>
                 <div className="performaDetailsNumber">
                   <p>

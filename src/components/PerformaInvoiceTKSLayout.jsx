@@ -4,7 +4,6 @@ import Signature from "../assets/Signature.png";
 import { toWords } from "number-to-words";
 import { Margin, Resolution, usePDF } from "react-to-pdf";
 
-
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, "0");
@@ -96,9 +95,9 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
               </sub>
               <div className="performaHeadingInfoSub">
                 <p>
-                  No. 57/D, Balaji Layout, Vajarahalli, Near 100ft road, off
-                  Kankapura main road Thalaghattapura,Bangalore South,
-                  <br /> Bangalore - 560109.
+                  No.315/64, Mallasandra village , off holiday village road,
+                  Thalaghattapura, Bangalore, Bangalore South, Karnataka, India,
+                  560109
                 </p>
                 <div className="performaDetailsNumber">
                   <p>
