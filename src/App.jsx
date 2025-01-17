@@ -13,6 +13,8 @@ import QuotationInvoiceTKS from "./components/QuotationInvoiceTKS";
 import PurchaseOrder from "./components/PurchaseOrder";
 import PurchaseOrderKES from "./components/PurchaseOrderKES";
 import PurchaseOrderTKS from "./components/PurchaseOrderTKS";
+import DeliveryChallan from "./components/DeliveryChallan";
+import DeliveryChallanKES from "./components/DeliveryChallanKES";
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
           <Route path="PurchaseOrder" element={<PurchaseOrder />} />
           <Route path="PurchaseOrder/KES" element={<PurchaseOrderKES />} />
           <Route path="PurchaseOrder/TKS" element={<PurchaseOrderTKS />} />
+          <Route path="DeliveryChallan" element={<DeliveryChallan />} />
+          <Route path="DeliveryChallan/KES" element={<DeliveryChallanKES />} />
           <Route path="*" element={<Home />} />
         </Route>
       </Routes>
@@ -47,11 +51,8 @@ function App() {
 
 export default App;
 
-
-
-
-
-{/* <div className="formSection">
+{
+  /* <div className="formSection">
             <div className="formSectionHeading">Tax</div>
             <div className="formSubSection">
               <div className="formInputDiv">
@@ -170,4 +171,5 @@ export default App;
                 <p>Add Terms</p>
               </div>
             </div>
-          </div> */}
+          </div> */
+}

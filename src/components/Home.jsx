@@ -34,6 +34,11 @@ function Home() {
               <p>Purchase Order</p>
             </Link>
           </div>
+          <div className="homeContainer">
+            <Link to="/DeliveryChallan" className="homeOption">
+              <p>Delivery Challan</p>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
