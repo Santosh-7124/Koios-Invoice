@@ -282,13 +282,12 @@ function PerformaInvoiceKES() {
               </div>
               <div className="formInputDiv">
                 <label htmlFor="billedToPhoneNumber">
-                  Phone Number<span>*</span>
+                  Phone Number
                 </label>
                 <PhoneInput
                   placeholder="Enter phone number"
                   country="IN"
                   value={billedPhoneNumberValue}
-                  required
                   onChange={billedPhoneNumberSetValue}
                   id="billedToPhoneNumber"
                 />
