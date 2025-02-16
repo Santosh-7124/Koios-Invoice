@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import Home from "./components/Home";
 import PerformaInvoice from "./components/PerformaInvoice";
 import PerformaInvoiceKES from "./components/PerformaInvoiceKES";
@@ -18,34 +19,45 @@ import DeliveryChallanKES from "./components/DeliveryChallanKES";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/">
-          <Route index element={<Home />} />
-          <Route path="PerformaInvoice" element={<PerformaInvoice />} />
-          <Route path="PerformaInvoice/KES" element={<PerformaInvoiceKES />} />
-          <Route path="PerformaInvoice/TKS" element={<PerformaInvoiceTKS />} />
-          <Route path="TaxInvoice" element={<TaxInvoice />} />
-          <Route path="TaxInvoice/KES" element={<TaxInvoiceKES />} />
-          <Route path="TaxInvoice/TKS" element={<TaxInvoiceTKS />} />
-          <Route path="QuotationInvoice" element={<QuotationInvoice />} />
-          <Route
-            path="QuotationInvoice/KES"
-            element={<QuotationInvoiceKES />}
-          />
-          <Route
-            path="QuotationInvoice/TKS"
-            element={<QuotationInvoiceTKS />}
-          />
-          <Route path="PurchaseOrder" element={<PurchaseOrder />} />
-          <Route path="PurchaseOrder/KES" element={<PurchaseOrderKES />} />
-          <Route path="PurchaseOrder/TKS" element={<PurchaseOrderTKS />} />
-          <Route path="DeliveryChallan" element={<DeliveryChallan />} />
-          <Route path="DeliveryChallan/KES" element={<DeliveryChallanKES />} />
-          <Route path="*" element={<Home />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Home />} />
+            <Route path="PerformaInvoice" element={<PerformaInvoice />} />
+            <Route
+              path="PerformaInvoice/KES"
+              element={<PerformaInvoiceKES />}
+            />
+            <Route
+              path="PerformaInvoice/TKS"
+              element={<PerformaInvoiceTKS />}
+            />
+            <Route path="TaxInvoice" element={<TaxInvoice />} />
+            <Route path="TaxInvoice/KES" element={<TaxInvoiceKES />} />
+            <Route path="TaxInvoice/TKS" element={<TaxInvoiceTKS />} />
+            <Route path="QuotationInvoice" element={<QuotationInvoice />} />
+            <Route
+              path="QuotationInvoice/KES"
+              element={<QuotationInvoiceKES />}
+            />
+            <Route
+              path="QuotationInvoice/TKS"
+              element={<QuotationInvoiceTKS />}
+            />
+            <Route path="PurchaseOrder" element={<PurchaseOrder />} />
+            <Route path="PurchaseOrder/KES" element={<PurchaseOrderKES />} />
+            <Route path="PurchaseOrder/TKS" element={<PurchaseOrderTKS />} />
+            <Route path="DeliveryChallan" element={<DeliveryChallan />} />
+            <Route
+              path="DeliveryChallan/KES"
+              element={<DeliveryChallanKES />}
+            />
+            <Route path="*" element={<Home />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 
