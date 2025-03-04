@@ -29,7 +29,7 @@ function Home() {
                 <p>Performa Invoice</p>
               </Link>
               <Link to="/QuotationInvoice" className="homeOption">
-                <p>Quotation Invoice</p>
+                <p>Quotation</p>
               </Link>
             </div>
             <div className="homeContainer">

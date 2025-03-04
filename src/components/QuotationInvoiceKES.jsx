@@ -135,18 +135,18 @@ function QuotationInvoiceKES() {
         </script>
         {/* Add new favicon */}
         <link rel="icon" type="image/png" href="/KESLogo.png" />
-        <title>KES Quotation Invoice</title>
+        <title>KES Quotation</title>
       </Helmet>
       <div>
         <div className="heading">
           <div className="breadcrumb">
             <Link to="/">Home</Link>
             <span>{">"}</span>
-            <Link to="/QuotationInvoice">Quotation Invoice</Link>
+            <Link to="/QuotationInvoice">Quotation</Link>
             <span>{">"}</span>
             <p>Koios Engineering Service</p>
           </div>
-          <p>Quotation Invoice</p>
+          <p>Quotation</p>
         </div>
         <form id="PurchaseKES" name="PurchaseKES" onSubmit={handleSubmit}>
           <div className="formContainer">

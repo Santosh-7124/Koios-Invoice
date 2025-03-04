@@ -14,7 +14,7 @@ function QuotationInvoice() {
         </script>
         {/* Add new favicon */}
         <link rel="icon" type="image/svg+xml" href="/react.svg" />
-        <title>Quotation Invoice</title>
+        <title>Quotation</title>
       </Helmet>
       <div className="twoOptionPage">
         <div

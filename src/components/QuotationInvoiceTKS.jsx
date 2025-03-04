@@ -222,14 +222,14 @@ function QuotationInvoiceTKS() {
         </script>
         {/* Add new favicon */}
         <link rel="icon" type="image/png" href="/TKSLogo.png" />
-        <title>TKS Quotation Invoice</title>
+        <title>TKS Quotation</title>
       </Helmet>
       <div>
         <div className="heading">
           <div className="breadcrumb">
             <Link to="/">Home</Link>
             <span>{">"}</span>
-            <Link to="/QuotationInvoice">Quotation Invoice</Link>
+            <Link to="/QuotationInvoice">Quotation</Link>
             <span>{">"}</span>
             <p>The Koios Studio</p>
           </div>
