@@ -485,9 +485,6 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
               ))}
             </ol>
           </div>
-          <div className="performaPaymentDetailsRight">
-            <p>Authorised Signatory</p>
-          </div>
         </div>
       </div>
       <div className="formButton">
