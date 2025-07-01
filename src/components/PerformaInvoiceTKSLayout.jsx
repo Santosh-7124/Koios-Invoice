@@ -312,7 +312,7 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
             }}
           >
             <sub>Koios Software Solutions PVT Ltd</sub>
-            <sub>ICICI Bank</sub>
+            <sub>IndusInd Bank</sub>
           </div>
           <div className="performaHeadingInfoSub">
             <div className="performaDetailsNumber">
@@ -320,13 +320,13 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
                 <span>
                   <sub>IFSC Code</sub>:
                 </span>
-                ICIC0004405
+                INDB0001681
               </p>
               <p>
                 <span>
                   <sub>Account Number</sub>:
                 </span>
-                440505000387
+                252297989801
               </p>
               <p>
                 <span>
@@ -338,7 +338,7 @@ const PerformaInvoiceTKSLayout = ({ data }) => {
                 <span>
                   <sub>Branch</sub>:
                 </span>
-                Kanakapura Road
+                Giri Nagar Branch
               </p>
             </div>
           </div>
