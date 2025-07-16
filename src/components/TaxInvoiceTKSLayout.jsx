@@ -20,7 +20,7 @@ function TaxInvoiceTKSLayout({ data }) {
         total += detail.quantity * detail.cost;
       });
     });
-    return total;
+    return parseFloat(total.toFixed(2));
   };
 
   const totalCostInWords = () => {
@@ -217,7 +217,7 @@ function TaxInvoiceTKSLayout({ data }) {
               <p style={{ width: "80px" }}>Sub Total</p>
               <span>:</span>
               <p style={{ width: "100px", textAlign: "end" }}>
-                {"₹"} {calculateTotalCost()}
+                {"₹"} {parseFloat(calculateTotalCost().toFixed(2))}
               </p>
             </div>
             {data.Tax === "SGSTandCGST" && (
@@ -226,14 +226,20 @@ function TaxInvoiceTKSLayout({ data }) {
                   <p style={{ width: "80px" }}>CGST {data.CGST}%</p>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {"₹"} {(calculateTotalCost() * data.CGST) / 100}
+                    {"₹"}{" "}
+                    {parseFloat(
+                      ((calculateTotalCost() * data.CGST) / 100).toFixed(2)
+                    )}
                   </p>
                 </div>
                 <div className="performaAmountSet">
                   <p style={{ width: "80px" }}>SGST {data.SGST}%</p>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {"₹"} {(calculateTotalCost() * data.SGST) / 100}
+                    {"₹"}{" "}
+                    {parseFloat(
+                      ((calculateTotalCost() * data.SGST) / 100).toFixed(2)
+                    )}
                   </p>
                 </div>
                 <div className="performaAmountSet">
@@ -241,9 +247,13 @@ function TaxInvoiceTKSLayout({ data }) {
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
                     {"₹"}{" "}
-                    {(calculateTotalCost() * data.SGST) / 100 +
-                      (calculateTotalCost() * data.CGST) / 100 +
-                      calculateTotalCost()}
+                    {parseFloat(
+                      (
+                        (calculateTotalCost() * data.SGST) / 100 +
+                        (calculateTotalCost() * data.CGST) / 100 +
+                        calculateTotalCost()
+                      ).toFixed(2)
+                    )}
                   </p>
                 </div>
               </>
@@ -254,7 +264,10 @@ function TaxInvoiceTKSLayout({ data }) {
                   <p style={{ width: "80px" }}>IGST {data.IGST}%</p>
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
-                    {"₹"} {(calculateTotalCost() * data.IGST) / 100}
+                    {"₹"}{" "}
+                    {parseFloat(
+                      ((calculateTotalCost() * data.IGST) / 100).toFixed(2)
+                    )}
                   </p>
                 </div>
                 <div className="performaAmountSet">
@@ -262,8 +275,12 @@ function TaxInvoiceTKSLayout({ data }) {
                   <span>:</span>
                   <p style={{ width: "100px", textAlign: "end" }}>
                     {"₹"}{" "}
-                    {(calculateTotalCost() * data.IGST) / 100 +
-                      calculateTotalCost()}
+                    {parseFloat(
+                      (
+                        (calculateTotalCost() * data.IGST) / 100 +
+                        calculateTotalCost()
+                      ).toFixed(2)
+                    )}
                   </p>
                 </div>
               </>

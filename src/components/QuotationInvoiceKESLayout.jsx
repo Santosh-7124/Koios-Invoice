@@ -41,8 +41,8 @@ const QuotationInvoiceKESLayout = ({ data }) => {
   const formatIndianNumber = (number) => {
     return new Intl.NumberFormat("en-IN", {
       style: "decimal",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
     }).format(number);
   };
 
