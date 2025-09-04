@@ -45,7 +45,7 @@ function DeliveryChallan() {
             style={{ width: "50%" }}
             className="homeOption"
           >
-            <p>The Koios Studio</p>
+            <p>The KoioStudio</p>
           </Link> */}
           </div>
         </div>

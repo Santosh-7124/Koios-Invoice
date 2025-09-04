@@ -104,8 +104,8 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
             </div>
             <div className="performaHeadingInfo">
               <sub style={{ textTransform: "uppercase" }}>
-                Koios Studio
-                <span>a vertical of Koios Engineering Solutions Pvt. Ltd.</span>
+                KoioStudio
+                <span>a vertical of Koios Engineering Solution Pvt. Ltd.</span>
               </sub>
               <div className="performaHeadingInfoSub">
                 <p>
@@ -130,7 +130,7 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
                     <span>
                       <sub>Mobile</sub>:
                     </span>
-                    +91-6361668024
+                    +91 7338658118
                   </p>
                 </div>
               </div>

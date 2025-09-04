@@ -168,7 +168,7 @@ function TaxInvoiceTKS() {
             <span>{">"}</span>
             <Link to="/TaxInvoice ">Tax Invoice </Link>
             <span>{">"}</span>
-            <p>The Koios Studio</p>
+            <p>The KoioStudio</p>
           </div>
           <p>Tax Invoice</p>
         </div>

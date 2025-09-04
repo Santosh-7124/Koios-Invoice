@@ -231,7 +231,7 @@ function QuotationInvoiceTKS() {
             <span>{">"}</span>
             <Link to="/QuotationInvoice">Quotation</Link>
             <span>{">"}</span>
-            <p>The Koios Studio</p>
+            <p>The KoioStudio</p>
           </div>
           <p>Quotation</p>
         </div>
