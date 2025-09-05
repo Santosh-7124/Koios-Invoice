@@ -163,7 +163,7 @@ function PurchaseOrderTKS() {
             <span>{">"}</span>
             <Link to="/PurchaseOrder ">Purchase Order </Link>
             <span>{">"}</span>
-            <p>The KoioStudio</p>
+            <p>Koiostudio</p>
           </div>
           <p>Purchase Order</p>
         </div>

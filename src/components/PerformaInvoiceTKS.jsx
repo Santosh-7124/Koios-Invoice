@@ -162,7 +162,7 @@ function PerformaInvoiceTKS() {
             <span>{">"}</span>
             <Link to="/PerformaInvoice ">Performa Invoice </Link>
             <span>{">"}</span>
-            <p>The KoioStudio</p>
+            <p>Koiostudio</p>
           </div>
           <p>Performa Invoice</p>
         </div>

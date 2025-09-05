@@ -45,7 +45,7 @@ function PerformaInvoice() {
               style={{ width: "50%" }}
               className="homeOption"
             >
-              <p>The KoioStudio</p>
+              <p>Koiostudio</p>
             </Link>
           </div>
         </div>
