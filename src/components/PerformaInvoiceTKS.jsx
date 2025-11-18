@@ -51,7 +51,7 @@ function PerformaInvoiceTKS() {
     let shippedToPhoneNumber = "";
 
     if (event.target.elements.shippedToDefault.checked) {
-      shippedToCompany = "Koios Software Solutions PVT Ltd";
+      shippedToCompany = "Koios Engineering Solutions PVT Ltd";
       shippedToGSTIN = "22AAAAA1234A1Z7";
       shippedToPAN = "QHYUN1234T";
       shippedToAddress =

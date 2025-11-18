@@ -453,7 +453,7 @@ const QuotationInvoiceTKSLayout = ({ data }) => {
                 alignItems: "flex-start",
               }}
             >
-              <sub>Koios Software Solutions PVT Ltd</sub>
+              <sub>Koios Engineering Solutions PVT Ltd</sub>
               <sub>IndusInd Bank</sub>
             </div>
             <div className="performaHeadingInfoSub">
